@@ -1,0 +1,106 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="foot-brand">
+      <div class="brand">
+        <span class="brand-mark">A<span class="plus">+</span></span>
+        <span>
+          <strong>AcLab<span class="plus2">+</span></strong>
+          <span class="sub">Academic Laboratory</span>
+        </span>
+      </div>
+      <p class="muted">Phòng thí nghiệm học thuật về Kinh tế, Kinh doanh và Quản lý. Nơi khởi đầu của những đề tài nghiên cứu say mê.</p>
+    </div>
+
+    <div>
+      <h4>Liên kết</h4>
+      <ul>
+        <li><a href="/gioi-thieu/">Giới thiệu</a></li>
+        <li><a href="/hoat-dong/">Hoạt động</a></li>
+        <li><a href="/thanh-vien/">Thành viên</a></li>
+        <li><a href="/san-pham/">Sản phẩm</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h4>Nội dung</h4>
+      <ul>
+        <li><a href="/tin-tuc/">Tin tức</a></li>
+        <li><a href="/tuyen-thanh-vien/">Tuyển thành viên</a></li>
+        <li><a href="/lien-he/">Liên hệ</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h4>Liên hệ</h4>
+      <ul class="contact">
+        <li>📧 <a href="mailto:aclabecon@gmail.com">aclabecon@gmail.com</a></li>
+        <li>🌐 <a href="https://aclab.plus">aclab.plus</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="container foot-bottom">
+    <p>© {year} AcLab+ · Phòng thí nghiệm học thuật.</p>
+    <p class="muted">Trang web tĩnh, tạo bằng Astro.</p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--accent);
+    color: #d9dde6;
+    padding: 3.5rem 0 1.5rem;
+    margin-top: 4rem;
+    font-family: var(--font-sans);
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+    gap: 2.4rem;
+  }
+  @media (max-width: 800px) {
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+  }
+  @media (max-width: 480px) {
+    .footer-grid { grid-template-columns: 1fr; }
+  }
+  .site-footer h4 {
+    color: #fff; font-size: .85rem;
+    text-transform: uppercase; letter-spacing: .12em;
+    margin: 0 0 .9rem;
+  }
+  .site-footer ul {
+    list-style: none; padding: 0; margin: 0;
+    display: flex; flex-direction: column; gap: .55rem;
+  }
+  .site-footer a { color: #d9dde6; text-decoration: none; transition: color .2s; }
+  .site-footer a:hover { color: #ffd47a; }
+  .site-footer .muted { color: #98a0b3; }
+  .brand {
+    display: inline-flex; gap: .65rem; align-items: center;
+    margin-bottom: .9rem;
+  }
+  .brand-mark {
+    width: 38px; height: 38px;
+    display: inline-flex; align-items: center; justify-content: center;
+    background: #ffffff14; color: #fff;
+    font-weight: 700; border-radius: 8px;
+  }
+  .brand-mark .plus { color: #ffd47a; }
+  .brand strong { font-size: 1.05rem; color: #fff; display: block; }
+  .brand .plus2 { color: #ffd47a; }
+  .brand .sub { font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; color: #98a0b3; }
+  .foot-brand p { font-size: .94rem; line-height: 1.7; margin: 0; max-width: 32ch; }
+  .contact { font-size: .94rem; }
+  .foot-bottom {
+    margin-top: 2.4rem; padding-top: 1.4rem;
+    border-top: 1px solid rgba(255,255,255,.1);
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: .8rem;
+    font-size: .85rem;
+  }
+  .foot-bottom p { margin: 0; }
+</style>

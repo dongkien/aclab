@@ -1,0 +1,64 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const products = await getCollection('products');
+  return products.map(p => ({ params: { slug: p.id }, props: { product: p } }));
+}
+
+const { product } = Astro.props;
+const { Content } = await render(product);
+
+const typeLabel = (t: string) =>
+  ({ book: 'Sách', paper: 'Working Paper', report: 'Báo cáo', other: 'Ấn phẩm' }[t] || t);
+
+const fmt = (d: Date) =>
+  d.toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric' });
+---
+
+<BaseLayout title={product.data.title} description={product.data.description}>
+  <article class="product-article">
+    <div class="container-narrow">
+      <a href="/san-pham/" class="back-link">← Toàn bộ ấn phẩm</a>
+
+      <header class="p-header">
+        <span class="tag tag--accent">{typeLabel(product.data.type)}</span>
+        <h1>{product.data.title}</h1>
+        {product.data.description && <p class="lead">{product.data.description}</p>}
+        <p class="byline">
+          {product.data.authors.join(' · ')} · <time datetime={product.data.date.toISOString()}>{fmt(product.data.date)}</time>
+        </p>
+        {product.data.link && (
+          <a href={product.data.link} class="btn btn-primary" style="margin-top:1rem;">
+            Xem ấn phẩm bên ngoài ↗
+          </a>
+        )}
+      </header>
+
+      <div class="prose">
+        <Content />
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .product-article { padding: 3rem 0 5rem; }
+    .back-link {
+      font-family: var(--font-sans); font-size: .9rem;
+      color: var(--muted); text-decoration: none;
+      display: inline-block; margin-bottom: 1.5rem;
+    }
+    .back-link:hover { color: var(--accent-2); }
+    .p-header {
+      padding-bottom: 1.8rem; margin-bottom: 2.4rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .p-header h1 { margin: 1rem 0 .8rem; }
+    .p-header .lead { color: var(--muted); margin: 0 0 1rem; }
+    .byline {
+      font-family: var(--font-sans); font-size: .9rem;
+      color: var(--muted); margin: 0;
+    }
+  </style>
+</BaseLayout>

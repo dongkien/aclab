@@ -1,0 +1,72 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Tuyển thành viên" description="AcLab+ tuyển nghiên cứu viên, trợ lý nghiên cứu và cộng tác viên — mở quanh năm cho người làm học thuật trẻ.">
+
+  <section class="page-hero">
+    <div class="container-narrow">
+      <p class="kicker">Join us</p>
+      <h1>Tuyển thành viên</h1>
+      <p class="lead">AcLab+ tuyển thành viên quanh năm. Chúng tôi tìm những bạn trẻ có niềm say mê nghiên cứu, sẵn sàng học hỏi và đóng góp dài hạn.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container-narrow">
+      <div class="prose">
+        <h2>Các vị trí đang mở</h2>
+        <ul>
+          <li><strong>Nghiên cứu viên</strong> — yêu cầu tối thiểu trình độ thạc sĩ hoặc đang theo học chương trình tiến sĩ.</li>
+          <li><strong>Trợ lý nghiên cứu</strong> — dành cho sinh viên năm cuối hoặc mới tốt nghiệp.</li>
+          <li><strong>Cộng tác viên</strong> — tham gia theo từng dự án, không ràng buộc thời gian cố định.</li>
+        </ul>
+
+        <h2>Chúng tôi tìm gì ở bạn</h2>
+        <ul>
+          <li>Niềm say mê thật sự với một câu hỏi nghiên cứu cụ thể trong Kinh tế / Kinh doanh / Quản lý.</li>
+          <li>Khả năng tự học và kỷ luật cá nhân.</li>
+          <li>Tinh thần làm việc nhóm và sẵn sàng phản biện lẫn được phản biện.</li>
+          <li>Kỹ năng đọc tiếng Anh học thuật (đọc bài tạp chí được).</li>
+        </ul>
+
+        <h2>Quyền lợi</h2>
+        <ul>
+          <li>Tham gia các đề tài nghiên cứu thực sự, có cơ hội đứng tên đồng tác giả.</li>
+          <li>Được hướng dẫn 1–1 bởi nghiên cứu viên cao cấp.</li>
+          <li>Tham dự miễn phí toàn bộ seminar và workshop của AcLab+.</li>
+          <li>Kết nối với cộng đồng nghiên cứu trong và ngoài nước.</li>
+        </ul>
+      </div>
+
+      <div class="apply-card">
+        <h2>Nộp hồ sơ</h2>
+        <p>Gửi email tới <a href="mailto:aclabecon@gmail.com"><strong>aclabecon@gmail.com</strong></a> với tiêu đề <em>“Tuyển thành viên — Họ tên — Vị trí”</em>, đính kèm:</p>
+        <ol>
+          <li>CV học thuật (tối đa 2 trang).</li>
+          <li>Thư bày tỏ nguyện vọng (motivation letter, 500–800 từ): bạn quan tâm câu hỏi nghiên cứu gì, vì sao chọn AcLab+, mong muốn đóng góp ra sao.</li>
+          <li>Một mẫu công trình (bài tiểu luận, khóa luận, working paper… của bạn).</li>
+        </ol>
+        <p>Hồ sơ được xét hàng tháng. Các bạn lọt vào vòng phỏng vấn sẽ nhận phản hồi trong vòng 2 tuần.</p>
+        <a href="mailto:aclabecon@gmail.com?subject=Tuy%E1%BB%83n%20th%C3%A0nh%20vi%C3%AAn%20AcLab%2B" class="btn btn-primary" style="margin-top:.5rem;">
+          ✉️ Gửi email ứng tuyển
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .page-hero { padding: 4rem 0 2rem; background: linear-gradient(180deg, var(--bg) 0%, var(--surface-2) 100%); border-bottom: 1px solid var(--border); }
+    .page-hero h1 { margin: .6rem 0 1rem; }
+    .apply-card {
+      margin-top: 3rem;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+    }
+    .apply-card h2 { margin-top: 0; }
+    .apply-card ol { padding-left: 1.2rem; }
+    .apply-card li { margin-bottom: .5rem; }
+  </style>
+</BaseLayout>

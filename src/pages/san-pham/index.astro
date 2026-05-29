@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const products = (await getCollection('products'))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const typeLabel = (t: string) =>
+  ({ book: 'Sách', paper: 'Working Paper', report: 'Báo cáo', other: 'Ấn phẩm' }[t] || t);
+
+const fmt = (d: Date) =>
+  d.toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric' });
+---
+
+<BaseLayout title="Sản phẩm" description="Sách, working paper, báo cáo và các ấn phẩm khác từ AcLab+.">
+
+  <section class="page-hero">
+    <div class="container-narrow">
+      <p class="kicker">Publications</p>
+      <h1>Sản phẩm · Ấn phẩm</h1>
+      <p class="lead">Sách chuyên khảo, working paper và báo cáo nghiên cứu của các thành viên AcLab+.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid grid-2">
+        {products.map(p => (
+          <article class="card product-card">
+            <span class="tag tag--accent">{typeLabel(p.data.type)}</span>
+            <h2><a href={`/san-pham/${p.id}/`}>{p.data.title}</a></h2>
+            {p.data.description && <p>{p.data.description}</p>}
+            <p class="muted">{p.data.authors.join(' · ')} — {fmt(p.data.date)}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .page-hero { padding: 4rem 0 2rem; background: linear-gradient(180deg, var(--bg) 0%, var(--surface-2) 100%); border-bottom: 1px solid var(--border); }
+    .page-hero h1 { margin: .6rem 0 1rem; }
+    .product-card .tag { margin-bottom: 1rem; }
+    .product-card h2 { font-size: 1.3rem; margin: 0 0 .8rem; }
+    .product-card h2 a { color: var(--text); text-decoration: none; }
+    .product-card h2 a:hover { color: var(--accent-2); }
+    .product-card .muted { font-size: .88rem; margin: .8rem 0 0; }
+  </style>
+</BaseLayout>

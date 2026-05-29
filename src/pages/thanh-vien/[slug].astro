@@ -1,0 +1,74 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const members = await getCollection('members');
+  return members.map(m => ({ params: { slug: m.id }, props: { member: m } }));
+}
+
+const { member } = Astro.props;
+const { Content } = await render(member);
+const initial = member.data.name.split(' ').slice(-1)[0][0];
+---
+
+<BaseLayout title={member.data.name} description={`${member.data.role} tại AcLab+`}>
+  <article class="member-detail">
+    <div class="container-narrow">
+      <a href="/thanh-vien/" class="back-link">← Toàn bộ thành viên</a>
+
+      <header class="m-header">
+        <div class="avatar-lg">{initial}</div>
+        <div>
+          <p class="kicker">{member.data.role}</p>
+          <h1>{member.data.name}</h1>
+          {member.data.expertise.length > 0 && (
+            <div class="tags">
+              {member.data.expertise.map((t: string) => <span class="tag">{t}</span>)}
+            </div>
+          )}
+          <ul class="contacts">
+            {member.data.email && <li>📧 <a href={`mailto:${member.data.email}`}>{member.data.email}</a></li>}
+            {member.data.linkedin && <li>🔗 <a href={member.data.linkedin}>LinkedIn</a></li>}
+            {member.data.orcid && <li>🆔 <a href={member.data.orcid}>ORCID</a></li>}
+          </ul>
+        </div>
+      </header>
+
+      <div class="prose">
+        <Content />
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .member-detail { padding: 3rem 0 5rem; }
+    .back-link {
+      font-family: var(--font-sans); font-size: .9rem;
+      color: var(--muted); text-decoration: none; display: inline-block; margin-bottom: 1.5rem;
+    }
+    .back-link:hover { color: var(--accent-2); }
+    .m-header {
+      display: grid; grid-template-columns: 120px 1fr; gap: 2rem;
+      align-items: center;
+      padding-bottom: 2rem; margin-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+    @media (max-width: 600px) { .m-header { grid-template-columns: 1fr; text-align: center; } }
+    .avatar-lg {
+      width: 120px; height: 120px; border-radius: 50%;
+      background: var(--accent); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-sans); font-weight: 700; font-size: 3rem;
+      margin: 0 auto;
+    }
+    .m-header h1 { margin: .4rem 0 1rem; }
+    .tags { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: 1rem; }
+    @media (max-width: 600px) { .tags { justify-content: center; } }
+    .contacts {
+      list-style: none; padding: 0; margin: 0;
+      display: flex; flex-direction: column; gap: .35rem;
+      font-family: var(--font-sans); font-size: .94rem;
+    }
+  </style>
+</BaseLayout>

@@ -1,0 +1,133 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Liên hệ" description="Liên hệ với AcLab+ qua email aclabecon@gmail.com.">
+
+  <section class="page-hero">
+    <div class="container-narrow">
+      <p class="kicker">Contact</p>
+      <h1>Liên hệ với AcLab+</h1>
+      <p class="lead">Đề xuất hợp tác nghiên cứu, mời tham gia seminar, hay đơn giản là một câu hỏi về phương pháp — chúng tôi luôn sẵn sàng trao đổi.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-info">
+          <h2>Thông tin liên hệ</h2>
+
+          <div class="info-item">
+            <span class="icon">📧</span>
+            <div>
+              <strong>Email</strong>
+              <a href="mailto:aclabecon@gmail.com">aclabecon@gmail.com</a>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <span class="icon">🌐</span>
+            <div>
+              <strong>Website</strong>
+              <a href="https://aclab.plus">aclab.plus</a>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <span class="icon">⏰</span>
+            <div>
+              <strong>Phản hồi</strong>
+              <span>Trong vòng 2–3 ngày làm việc.</span>
+            </div>
+          </div>
+        </div>
+
+        <form class="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+          <h2>Gửi tin nhắn</h2>
+          <p class="muted">Mẫu này hoạt động ngay sau khi triển khai trên Netlify (Netlify Forms tự xử lý).</p>
+
+          <input type="hidden" name="form-name" value="contact" />
+          <p hidden><label>Để trống: <input name="bot-field" /></label></p>
+
+          <label>
+            Họ và tên
+            <input type="text" name="name" required />
+          </label>
+
+          <label>
+            Email
+            <input type="email" name="email" required />
+          </label>
+
+          <label>
+            Chủ đề
+            <select name="subject">
+              <option>Hợp tác nghiên cứu</option>
+              <option>Mời seminar / báo cáo</option>
+              <option>Tư vấn học thuật</option>
+              <option>Khác</option>
+            </select>
+          </label>
+
+          <label>
+            Nội dung
+            <textarea name="message" rows="5" required></textarea>
+          </label>
+
+          <button type="submit" class="btn btn-primary">Gửi tin nhắn</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .page-hero { padding: 4rem 0 2rem; background: linear-gradient(180deg, var(--bg) 0%, var(--surface-2) 100%); border-bottom: 1px solid var(--border); }
+    .page-hero h1 { margin: .6rem 0 1rem; }
+    .contact-grid {
+      display: grid; grid-template-columns: 1fr 1.4fr; gap: 3rem;
+    }
+    @media (max-width: 800px) { .contact-grid { grid-template-columns: 1fr; gap: 2rem; } }
+    .contact-info h2, .contact-form h2 { margin-top: 0; }
+    .info-item {
+      display: flex; gap: 1rem; align-items: flex-start;
+      padding: 1rem 0; border-bottom: 1px solid var(--border-soft);
+    }
+    .info-item:last-child { border-bottom: 0; }
+    .info-item .icon { font-size: 1.4rem; }
+    .info-item strong {
+      display: block; font-family: var(--font-sans);
+      font-size: .82rem; color: var(--muted);
+      text-transform: uppercase; letter-spacing: .1em; margin-bottom: .2rem;
+    }
+    .contact-form {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+    }
+    .contact-form label {
+      display: block; margin-bottom: 1rem;
+      font-family: var(--font-sans); font-weight: 600;
+      font-size: .9rem; color: var(--text);
+    }
+    .contact-form input,
+    .contact-form select,
+    .contact-form textarea {
+      display: block; width: 100%;
+      margin-top: .35rem; padding: .65rem .8rem;
+      font-family: var(--font-serif); font-size: 1rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--bg); color: var(--text);
+      transition: border-color .2s;
+    }
+    .contact-form input:focus,
+    .contact-form select:focus,
+    .contact-form textarea:focus {
+      outline: none; border-color: var(--accent);
+    }
+    .contact-form textarea { resize: vertical; }
+    .contact-form .btn { width: 100%; justify-content: center; }
+  </style>
+</BaseLayout>

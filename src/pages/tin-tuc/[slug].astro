@@ -1,0 +1,71 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts', ({ data }) => !data.draft);
+  return posts.map(p => ({ params: { slug: p.id }, props: { post: p } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const fmt = (d: Date) =>
+  d.toLocaleDateString('vi-VN', { weekday: 'long', day: '2-digit', month: 'long', year: 'numeric' });
+---
+
+<BaseLayout title={post.data.title} description={post.data.description}>
+  <article class="post-article">
+    <div class="container-narrow">
+      <a href="/tin-tuc/" class="back-link">← Tất cả tin tức</a>
+
+      <header class="post-header">
+        {post.data.tags.length > 0 && (
+          <div class="tags">
+            {post.data.tags.map((t: string) => <span class="tag">{t}</span>)}
+          </div>
+        )}
+        <h1>{post.data.title}</h1>
+        {post.data.description && <p class="lead">{post.data.description}</p>}
+        <p class="byline">
+          <time datetime={post.data.date.toISOString()}>{fmt(post.data.date)}</time>
+          {post.data.author && <span> · bởi <strong>{post.data.author}</strong></span>}
+        </p>
+      </header>
+
+      <div class="prose">
+        <Content />
+      </div>
+
+      <footer class="post-footer">
+        <a href="/tin-tuc/" class="btn btn-outline">← Tin tức khác</a>
+      </footer>
+    </div>
+  </article>
+
+  <style>
+    .post-article { padding: 3rem 0 5rem; }
+    .back-link {
+      font-family: var(--font-sans); font-size: .9rem;
+      color: var(--muted); text-decoration: none;
+      display: inline-block; margin-bottom: 1.5rem;
+    }
+    .back-link:hover { color: var(--accent-2); }
+    .post-header {
+      padding-bottom: 1.6rem; margin-bottom: 2.4rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .post-header h1 { margin: .8rem 0 1rem; }
+    .post-header .lead { color: var(--muted); margin: 0 0 1rem; }
+    .byline {
+      font-family: var(--font-sans); font-size: .9rem;
+      color: var(--muted); margin: 0;
+    }
+    .byline strong { color: var(--text); }
+    .tags { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: 1rem; }
+    .post-footer {
+      margin-top: 3rem; padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+  </style>
+</BaseLayout>

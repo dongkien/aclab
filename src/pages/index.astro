@@ -1,0 +1,350 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('posts', ({ data }) => !data.draft);
+const latestPosts = allPosts
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+
+const featuredMembers = (await getCollection('members'))
+  .filter(m => m.data.featured)
+  .sort((a, b) => a.data.order - b.data.order);
+
+const featuredProducts = (await getCollection('products'))
+  .filter(p => p.data.featured)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 2);
+
+const fmt = (d: Date) =>
+  d.toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric' });
+---
+
+<BaseLayout title="AcLab+" description="Phòng thí nghiệm học thuật về Kinh tế, Kinh doanh và Quản lý. Nơi khởi đầu của những đề tài nghiên cứu say mê.">
+
+  <!-- ============== HERO ============== -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-text">
+        <p class="kicker">Academic Laboratory — Est. 2024</p>
+        <h1>
+          Nơi khởi đầu<br>
+          <span class="accent-script">của những đề tài</span><br>
+          <em>nghiên cứu say mê.</em>
+        </h1>
+        <p class="lead">
+          AcLab+ là một phòng thí nghiệm học thuật về <strong>Kinh tế</strong>,
+          <strong>Kinh doanh</strong> và <strong>Quản lý</strong>. Chúng tôi đánh thức,
+          nuôi dưỡng và khích lệ những nhà nghiên cứu trẻ qua đào tạo, nghiên cứu và tư vấn.
+        </p>
+        <div class="hero-cta">
+          <a href="/tuyen-thanh-vien/" class="btn btn-primary">Tham gia cùng chúng tôi</a>
+          <a href="/gioi-thieu/" class="btn btn-outline">Tìm hiểu về AcLab+</a>
+        </div>
+      </div>
+      <aside class="hero-card" aria-label="Số liệu nổi bật">
+        <div class="stat-row">
+          <div class="stat"><strong>03</strong><span>lĩnh vực nghiên cứu</span></div>
+          <div class="stat"><strong>12+</strong><span>thành viên</span></div>
+        </div>
+        <div class="stat-row">
+          <div class="stat"><strong>25+</strong><span>ấn phẩm</span></div>
+          <div class="stat"><strong>40+</strong><span>seminar</span></div>
+        </div>
+        <p class="hero-quote">
+          <span class="quote-mark">“</span>
+          Một nền học thuật khỏe mạnh bắt đầu từ những bộ óc tò mò,
+          được trang bị phương pháp đúng và được nuôi dưỡng trong một cộng đồng đủ chặt chẽ để va đập,
+          đủ rộng để học hỏi.
+        </p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ============== SỨ MỆNH ============== -->
+  <section class="section">
+    <div class="container-narrow" style="text-align:center;">
+      <p class="kicker">Sứ mệnh</p>
+      <h2>Đánh thức · Nuôi dưỡng · Khích lệ</h2>
+      <p class="lead" style="margin-top:1rem;">
+        Chúng tôi tin rằng nghiên cứu học thuật chất lượng cao là nền tảng của một xã hội tiến bộ.
+        AcLab+ tồn tại để tạo ra một môi trường nơi những câu hỏi tốt được nuôi dưỡng,
+        những phương pháp đúng được áp dụng, và những đóng góp có ý nghĩa được công bố ra thế giới.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============== HOẠT ĐỘNG ============== -->
+  <section class="section section--alt">
+    <div class="container">
+      <header class="section-head">
+        <div>
+          <p class="kicker">Hoạt động</p>
+          <h2>Ba trụ cột học thuật</h2>
+        </div>
+        <a href="/hoat-dong/" class="link-more">Xem chi tiết →</a>
+      </header>
+
+      <div class="grid grid-3" style="margin-top:2.2rem;">
+        <article class="card act-card">
+          <div class="act-num">01</div>
+          <h3>Đào tạo</h3>
+          <p>
+            Seminar và webinar định kỳ về phương pháp nghiên cứu hiện đại,
+            kỹ năng công bố quốc tế, và các kỹ thuật phân tích dữ liệu.
+          </p>
+          <a href="/hoat-dong/" class="link-more">Tham gia seminar →</a>
+        </article>
+
+        <article class="card act-card">
+          <div class="act-num">02</div>
+          <h3>Tổ chức nghiên cứu</h3>
+          <p>
+            Triển khai các đề tài khoa học gắn chặt với thực tiễn kinh tế Việt Nam,
+            từ nghiên cứu cơ bản đến nghiên cứu ứng dụng và chính sách.
+          </p>
+          <a href="/san-pham/" class="link-more">Xem ấn phẩm →</a>
+        </article>
+
+        <article class="card act-card">
+          <div class="act-num">03</div>
+          <h3>Tư vấn hỗ trợ</h3>
+          <p>
+            Đội ngũ chuyên gia của AcLab+ cung cấp tư vấn học thuật cho nhà nghiên cứu trẻ,
+            tổ chức và doanh nghiệp về phương pháp và chính sách.
+          </p>
+          <a href="/lien-he/" class="link-more">Yêu cầu tư vấn →</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== THÀNH VIÊN ============== -->
+  <section class="section">
+    <div class="container">
+      <header class="section-head">
+        <div>
+          <p class="kicker">Thành viên</p>
+          <h2>Những người đứng sau AcLab+</h2>
+        </div>
+        <a href="/thanh-vien/" class="link-more">Toàn bộ thành viên →</a>
+      </header>
+
+      <div class="grid grid-3" style="margin-top:2.2rem;">
+        {featuredMembers.map(m => (
+          <article class="card member-card">
+            <div class="avatar">{m.data.name.split(' ').slice(-1)[0][0]}</div>
+            <h3>{m.data.name}</h3>
+            <p class="role">{m.data.role}</p>
+            {m.data.expertise.length > 0 && (
+              <div class="tags">
+                {m.data.expertise.slice(0, 3).map(t => <span class="tag">{t}</span>)}
+              </div>
+            )}
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== TIN TỨC ============== -->
+  <section class="section section--alt">
+    <div class="container">
+      <header class="section-head">
+        <div>
+          <p class="kicker">Tin tức · Hoạt động</p>
+          <h2>Cập nhật mới nhất</h2>
+        </div>
+        <a href="/tin-tuc/" class="link-more">Tất cả tin tức →</a>
+      </header>
+
+      <div class="grid grid-3" style="margin-top:2.2rem;">
+        {latestPosts.map(post => (
+          <article class="card post-card">
+            <time datetime={post.data.date.toISOString()}>{fmt(post.data.date)}</time>
+            <h3><a href={`/tin-tuc/${post.id}/`}>{post.data.title}</a></h3>
+            <p>{post.data.description}</p>
+            {post.data.tags.length > 0 && (
+              <div class="tags">
+                {post.data.tags.slice(0, 2).map(t => <span class="tag">{t}</span>)}
+              </div>
+            )}
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== ẤN PHẨM ============== -->
+  {featuredProducts.length > 0 && (
+    <section class="section">
+      <div class="container">
+        <header class="section-head">
+          <div>
+            <p class="kicker">Ấn phẩm nổi bật</p>
+            <h2>Sách · Working paper · Báo cáo</h2>
+          </div>
+          <a href="/san-pham/" class="link-more">Tất cả ấn phẩm →</a>
+        </header>
+
+        <div class="grid grid-2" style="margin-top:2.2rem;">
+          {featuredProducts.map(p => (
+            <article class="card product-card">
+              <span class="tag tag--accent">
+                {p.data.type === 'book' ? 'Sách' : p.data.type === 'paper' ? 'Working Paper' : 'Báo cáo'}
+              </span>
+              <h3>{p.data.title}</h3>
+              <p>{p.data.description}</p>
+              <p class="muted" style="font-size:.88rem;">
+                {p.data.authors.join(' · ')} — {fmt(p.data.date)}
+              </p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- ============== CTA CUỐI ============== -->
+  <section class="cta-band">
+    <div class="container cta-grid">
+      <div>
+        <h2>Bạn quan tâm đến nghiên cứu học thuật?</h2>
+        <p>Chúng tôi luôn mở cửa với những bộ óc tò mò. Nộp hồ sơ tham gia AcLab+ hoặc liên hệ để bàn về hợp tác.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="/tuyen-thanh-vien/" class="btn btn-primary">Nộp hồ sơ</a>
+        <a href="/lien-he/" class="btn btn-outline">Liên hệ hợp tác</a>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  /* ---------- Hero ---------- */
+  .hero {
+    background: linear-gradient(180deg, var(--bg) 0%, var(--surface-2) 100%);
+    padding: 5rem 0 4.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 3rem; align-items: center;
+  }
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 2rem; }
+  }
+  .hero h1 {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(2.2rem, 6vw, 3.6rem);
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    margin: 1rem 0 1.4rem;
+    color: var(--text);
+  }
+  .hero h1 em { font-style: italic; color: var(--accent-2); font-weight: 500; }
+  .accent-script { font-family: var(--font-serif); font-weight: 500; color: var(--accent); }
+  .hero-cta { display: flex; gap: .8rem; flex-wrap: wrap; margin-top: 1.8rem; }
+  .hero-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.8rem;
+    box-shadow: var(--shadow-md);
+  }
+  .stat-row {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+    padding-bottom: 1rem; margin-bottom: 1rem;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .stat-row:last-of-type { border-bottom: 0; }
+  .stat strong {
+    display: block; font-family: var(--font-sans);
+    font-size: 2.2rem; color: var(--accent); line-height: 1; font-weight: 700;
+  }
+  .stat span {
+    font-family: var(--font-sans); font-size: .82rem;
+    color: var(--muted); margin-top: .3rem; display: block;
+  }
+  .hero-quote {
+    font-size: .96rem; line-height: 1.7;
+    color: var(--muted); font-style: italic;
+    margin: 1rem 0 0; position: relative;
+    padding-top: 1rem; border-top: 1px solid var(--border-soft);
+  }
+  .quote-mark {
+    font-family: Georgia, serif; font-size: 2.5rem;
+    color: var(--accent-2); line-height: 0;
+    margin-right: .15em; vertical-align: -0.4em;
+  }
+
+  /* ---------- Section head ---------- */
+  .section-head {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    gap: 1rem; flex-wrap: wrap;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1rem;
+  }
+  .section-head h2 { margin: .4rem 0 0; }
+  .link-more {
+    font-family: var(--font-sans); font-weight: 600;
+    font-size: .92rem; color: var(--accent-2);
+    text-decoration: none; white-space: nowrap;
+  }
+  .link-more:hover { color: var(--accent); }
+
+  /* ---------- Activity ---------- */
+  .act-card { position: relative; padding-top: 2rem; }
+  .act-num {
+    font-family: var(--font-sans); font-weight: 700;
+    font-size: .85rem; color: var(--accent-2); letter-spacing: .08em;
+    position: absolute; top: 1.6rem; right: 1.6rem;
+  }
+
+  /* ---------- Member ---------- */
+  .member-card { text-align: center; }
+  .avatar {
+    width: 80px; height: 80px; border-radius: 50%;
+    margin: 0 auto 1rem;
+    background: var(--accent); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-sans); font-weight: 700; font-size: 2rem;
+  }
+  .member-card h3 { margin: 0; }
+  .member-card .role {
+    font-family: var(--font-sans); font-size: .9rem;
+    color: var(--accent-2); margin: .3rem 0 1rem;
+  }
+  .tags { display: flex; flex-wrap: wrap; gap: .4rem; justify-content: center; }
+
+  /* ---------- Posts ---------- */
+  .post-card time {
+    font-family: var(--font-sans); font-size: .82rem;
+    color: var(--muted); letter-spacing: .04em;
+  }
+  .post-card h3 { margin: .5rem 0 .7rem; }
+  .post-card h3 a { color: var(--text); text-decoration: none; }
+  .post-card h3 a:hover { color: var(--accent-2); }
+  .post-card p { color: var(--muted); font-size: .96rem; line-height: 1.65; }
+  .post-card .tags { justify-content: flex-start; margin-top: .8rem; }
+
+  /* ---------- Products ---------- */
+  .product-card .tag { margin-bottom: 1rem; }
+
+  /* ---------- CTA band ---------- */
+  .cta-band { background: var(--accent); color: #fff; padding: 3.5rem 0; }
+  .cta-grid {
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 2rem; flex-wrap: wrap;
+  }
+  .cta-band h2 { color: #fff; margin: 0 0 .4rem; }
+  .cta-band p { color: rgba(255,255,255,.85); margin: 0; max-width: 50ch; }
+  .cta-actions { display: flex; gap: .8rem; flex-wrap: wrap; }
+  .cta-band .btn-primary { background: var(--accent-2); }
+  .cta-band .btn-primary:hover { background: #a23434; }
+  .cta-band .btn-outline { color: #fff; border-color: rgba(255,255,255,.5); }
+  .cta-band .btn-outline:hover { background: #fff; color: var(--accent); }
+</style>

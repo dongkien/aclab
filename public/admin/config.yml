@@ -1,0 +1,93 @@
+# =============================================================
+# Decap CMS — cấu hình quản trị nội dung cho AcLab+
+# Tài liệu: https://decapcms.org/docs/
+# =============================================================
+
+backend:
+  name: git-gateway          # dùng Netlify Identity + Git Gateway
+  branch: main               # đổi nếu repo dùng branch khác
+
+# Khi muốn chạy thử local, bỏ comment 2 dòng dưới rồi `npx decap-server`
+# local_backend: true
+
+site_url: https://aclab.plus
+display_url: https://aclab.plus
+logo_url: /favicon.svg
+
+publish_mode: editorial_workflow   # tạo PR nháp thay vì đăng thẳng
+
+media_folder: "public/uploads"     # nơi lưu ảnh upload
+public_folder: "/uploads"          # URL công khai
+
+locale: vi
+
+# -------- Collections --------
+collections:
+
+  # ====== Tin tức ======
+  - name: "posts"
+    label: "Tin tức"
+    label_singular: "Bài viết"
+    folder: "src/content/posts"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    fields:
+      - { name: "title",       label: "Tiêu đề",   widget: "string" }
+      - { name: "description", label: "Mô tả ngắn", widget: "text",   required: false }
+      - { name: "date",        label: "Ngày đăng", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, picker_utc: false }
+      - { name: "author",      label: "Tác giả",   widget: "string", required: false }
+      - { name: "tags",        label: "Thẻ (tags)", widget: "list",  default: [], required: false }
+      - { name: "cover",       label: "Ảnh bìa",   widget: "image",  required: false }
+      - { name: "draft",       label: "Bản nháp",  widget: "boolean", default: false }
+      - { name: "body",        label: "Nội dung",  widget: "markdown" }
+
+  # ====== Thành viên ======
+  - name: "members"
+    label: "Thành viên"
+    label_singular: "Thành viên"
+    folder: "src/content/members"
+    create: true
+    slug: "{{order}}-{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    fields:
+      - { name: "name",      label: "Họ tên",         widget: "string" }
+      - { name: "role",      label: "Chức danh",      widget: "string" }
+      - { name: "order",     label: "Thứ tự hiển thị", widget: "number", value_type: "int", default: 99, min: 1 }
+      - { name: "avatar",    label: "Ảnh đại diện",   widget: "image",  required: false }
+      - { name: "email",     label: "Email",          widget: "string", required: false }
+      - { name: "linkedin",  label: "LinkedIn URL",   widget: "string", required: false }
+      - { name: "orcid",     label: "ORCID URL",      widget: "string", required: false }
+      - { name: "expertise", label: "Lĩnh vực chuyên môn", widget: "list", default: [], required: false }
+      - { name: "featured",  label: "Hiển thị nổi bật ở trang chủ?", widget: "boolean", default: false }
+      - { name: "body",      label: "Tiểu sử",        widget: "markdown" }
+
+  # ====== Sản phẩm / Ấn phẩm ======
+  - name: "products"
+    label: "Ấn phẩm"
+    label_singular: "Ấn phẩm"
+    folder: "src/content/products"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    fields:
+      - { name: "title",       label: "Tên ấn phẩm", widget: "string" }
+      - name: "type"
+        label: "Loại"
+        widget: "select"
+        options:
+          - { label: "Sách",          value: "book" }
+          - { label: "Working Paper", value: "paper" }
+          - { label: "Báo cáo",       value: "report" }
+          - { label: "Khác",          value: "other" }
+        default: "other"
+      - { name: "date",        label: "Ngày phát hành", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, picker_utc: false }
+      - { name: "authors",     label: "Tác giả",      widget: "list",   default: [] }
+      - { name: "description", label: "Mô tả ngắn",   widget: "text",   required: false }
+      - { name: "cover",       label: "Ảnh bìa",      widget: "image",  required: false }
+      - { name: "link",        label: "Liên kết bên ngoài (URL)", widget: "string", required: false }
+      - { name: "featured",    label: "Hiển thị nổi bật?", widget: "boolean", default: false }
+      - { name: "body",        label: "Mô tả chi tiết", widget: "markdown" }

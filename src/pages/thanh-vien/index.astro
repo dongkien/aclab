@@ -1,0 +1,57 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const members = (await getCollection('members')).sort((a, b) => a.data.order - b.data.order);
+const initialOf = (name: string) => name.split(' ').slice(-1)[0][0];
+---
+
+<BaseLayout title="Thành viên" description="Đội ngũ thành viên của AcLab+ — nhà nghiên cứu, giảng viên và sinh viên đang cùng xây dựng phòng thí nghiệm học thuật.">
+
+  <section class="page-hero">
+    <div class="container-narrow">
+      <p class="kicker">Members</p>
+      <h1>Đội ngũ AcLab+</h1>
+      <p class="lead">Chúng tôi là một cộng đồng nhỏ nhưng cam kết — gồm nhà nghiên cứu có kinh nghiệm, các bạn trẻ vừa bước vào con đường học thuật, và những cộng sự gắn bó qua từng dự án.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid grid-3">
+        {members.map(m => (
+          <article class="card member-card">
+            <div class="avatar">{initialOf(m.data.name)}</div>
+            <h3><a href={`/thanh-vien/${m.id}/`}>{m.data.name}</a></h3>
+            <p class="role">{m.data.role}</p>
+            {m.data.expertise.length > 0 && (
+              <div class="tags">
+                {m.data.expertise.slice(0, 3).map((t: string) => <span class="tag">{t}</span>)}
+              </div>
+            )}
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .page-hero { padding: 4rem 0 2rem; background: linear-gradient(180deg, var(--bg) 0%, var(--surface-2) 100%); border-bottom: 1px solid var(--border); }
+    .page-hero h1 { margin: .6rem 0 1rem; }
+    .member-card { text-align: center; }
+    .avatar {
+      width: 80px; height: 80px; border-radius: 50%;
+      margin: 0 auto 1rem; background: var(--accent); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-sans); font-weight: 700; font-size: 2rem;
+    }
+    .member-card h3 { margin: 0; }
+    .member-card h3 a { color: var(--text); text-decoration: none; }
+    .member-card h3 a:hover { color: var(--accent-2); }
+    .member-card .role {
+      font-family: var(--font-sans); font-size: .9rem;
+      color: var(--accent-2); margin: .3rem 0 1rem;
+    }
+    .tags { display: flex; flex-wrap: wrap; gap: .4rem; justify-content: center; }
+  </style>
+</BaseLayout>
