@@ -38,8 +38,8 @@ const fmt = (d: Date) =>
           nuôi dưỡng và khích lệ những nhà nghiên cứu trẻ qua đào tạo, nghiên cứu và tư vấn.
         </p>
         <div class="hero-cta">
-          <a href="/tuyen-thanh-vien/" class="btn btn-primary">Tham gia cùng chúng tôi</a>
-          <a href="/gioi-thieu/" class="btn btn-outline">Tìm hiểu về AcLab+</a>
+          <a href={`${import.meta.env.BASE_URL}tuyen-thanh-vien/`} class="btn btn-primary">Tham gia cùng chúng tôi</a>
+          <a href={`${import.meta.env.BASE_URL}gioi-thieu/`} class="btn btn-outline">Tìm hiểu về AcLab+</a>
         </div>
       </div>
       <aside class="hero-card" aria-label="Số liệu nổi bật">
@@ -82,7 +82,7 @@ const fmt = (d: Date) =>
           <p class="kicker">Hoạt động</p>
           <h2>Ba trụ cột học thuật</h2>
         </div>
-        <a href="/hoat-dong/" class="link-more">Xem chi tiết →</a>
+        <a href={`${import.meta.env.BASE_URL}hoat-dong/`} class="link-more">Xem chi tiết →</a>
       </header>
 
       <div class="grid grid-3" style="margin-top:2.2rem;">
@@ -93,7 +93,7 @@ const fmt = (d: Date) =>
             Seminar và webinar định kỳ về phương pháp nghiên cứu hiện đại,
             kỹ năng công bố quốc tế, và các kỹ thuật phân tích dữ liệu.
           </p>
-          <a href="/hoat-dong/" class="link-more">Tham gia seminar →</a>
+          <a href={`${import.meta.env.BASE_URL}hoat-dong/`} class="link-more">Tham gia seminar →</a>
         </article>
 
         <article class="card act-card">
@@ -103,7 +103,7 @@ const fmt = (d: Date) =>
             Triển khai các đề tài khoa học gắn chặt với thực tiễn kinh tế Việt Nam,
             từ nghiên cứu cơ bản đến nghiên cứu ứng dụng và chính sách.
           </p>
-          <a href="/san-pham/" class="link-more">Xem ấn phẩm →</a>
+          <a href={`${import.meta.env.BASE_URL}san-pham/`} class="link-more">Xem ấn phẩm →</a>
         </article>
 
         <article class="card act-card">
@@ -113,7 +113,7 @@ const fmt = (d: Date) =>
             Đội ngũ chuyên gia của AcLab+ cung cấp tư vấn học thuật cho nhà nghiên cứu trẻ,
             tổ chức và doanh nghiệp về phương pháp và chính sách.
           </p>
-          <a href="/lien-he/" class="link-more">Yêu cầu tư vấn →</a>
+          <a href={`${import.meta.env.BASE_URL}lien-he/`} class="link-more">Yêu cầu tư vấn →</a>
         </article>
       </div>
     </div>
@@ -127,7 +127,7 @@ const fmt = (d: Date) =>
           <p class="kicker">Thành viên</p>
           <h2>Những người đứng sau AcLab+</h2>
         </div>
-        <a href="/thanh-vien/" class="link-more">Toàn bộ thành viên →</a>
+        <a href={`${import.meta.env.BASE_URL}thanh-vien/`} class="link-more">Toàn bộ thành viên →</a>
       </header>
 
       <div class="grid grid-3" style="margin-top:2.2rem;">
@@ -155,14 +155,14 @@ const fmt = (d: Date) =>
           <p class="kicker">Tin tức · Hoạt động</p>
           <h2>Cập nhật mới nhất</h2>
         </div>
-        <a href="/tin-tuc/" class="link-more">Tất cả tin tức →</a>
+        <a href={`${import.meta.env.BASE_URL}tin-tuc/`} class="link-more">Tất cả tin tức →</a>
       </header>
 
       <div class="grid grid-3" style="margin-top:2.2rem;">
         {latestPosts.map(post => (
           <article class="card post-card">
             <time datetime={post.data.date.toISOString()}>{fmt(post.data.date)}</time>
-            <h3><a href={`/tin-tuc/${post.id}/`}>{post.data.title}</a></h3>
+            <h3><a href={`${import.meta.env.BASE_URL}tin-tuc/${post.id}/`}>{post.data.title}</a></h3>
             <p>{post.data.description}</p>
             {post.data.tags.length > 0 && (
               <div class="tags">
@@ -184,7 +184,7 @@ const fmt = (d: Date) =>
             <p class="kicker">Ấn phẩm nổi bật</p>
             <h2>Sách · Working paper · Báo cáo</h2>
           </div>
-          <a href="/san-pham/" class="link-more">Tất cả ấn phẩm →</a>
+          <a href={`${import.meta.env.BASE_URL}san-pham/`} class="link-more">Tất cả ấn phẩm →</a>
         </header>
 
         <div class="grid grid-2" style="margin-top:2.2rem;">
@@ -213,8 +213,8 @@ const fmt = (d: Date) =>
         <p>Chúng tôi luôn mở cửa với những bộ óc tò mò. Nộp hồ sơ tham gia AcLab+ hoặc liên hệ để bàn về hợp tác.</p>
       </div>
       <div class="cta-actions">
-        <a href="/tuyen-thanh-vien/" class="btn btn-primary">Nộp hồ sơ</a>
-        <a href="/lien-he/" class="btn btn-outline">Liên hệ hợp tác</a>
+        <a href={`${import.meta.env.BASE_URL}tuyen-thanh-vien/`} class="btn btn-primary">Nộp hồ sơ</a>
+        <a href={`${import.meta.env.BASE_URL}lien-he/`} class="btn btn-outline">Liên hệ hợp tác</a>
       </div>
     </div>
   </section>

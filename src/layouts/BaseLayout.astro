@@ -28,7 +28,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://aclab.plus'
   <title>{fullTitle}</title>
   <meta name="description" content={description} />
   <link rel="canonical" href={canonical.toString()} />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}favicon.svg`} />
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
@@ -38,9 +38,6 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://aclab.plus'
   <meta property="og:locale" content="vi_VN" />
   {image && <meta property="og:image" content={image} />}
   <meta name="twitter:card" content="summary_large_image" />
-
-  <!-- Netlify Identity (cho phép redirect về /admin/ sau khi xác nhận email) -->
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js" defer></script>
 </head>
 <body>
   <a href="#main" class="skip-link">Bỏ qua tới nội dung</a>

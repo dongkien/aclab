@@ -20,7 +20,7 @@ const fmt = (d: Date) =>
 <BaseLayout title={product.data.title} description={product.data.description}>
   <article class="product-article">
     <div class="container-narrow">
-      <a href="/san-pham/" class="back-link">← Toàn bộ ấn phẩm</a>
+      <a href={`${import.meta.env.BASE_URL}san-pham/`} class="back-link">← Toàn bộ ấn phẩm</a>
 
       <header class="p-header">
         <span class="tag tag--accent">{typeLabel(product.data.type)}</span>

@@ -15,7 +15,7 @@ const initial = member.data.name.split(' ').slice(-1)[0][0];
 <BaseLayout title={member.data.name} description={`${member.data.role} tại AcLab+`}>
   <article class="member-detail">
     <div class="container-narrow">
-      <a href="/thanh-vien/" class="back-link">← Toàn bộ thành viên</a>
+      <a href={`${import.meta.env.BASE_URL}thanh-vien/`} class="back-link">← Toàn bộ thành viên</a>
 
       <header class="m-header">
         <div class="avatar-lg">{initial}</div>

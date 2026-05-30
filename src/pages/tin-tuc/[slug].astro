@@ -17,7 +17,7 @@ const fmt = (d: Date) =>
 <BaseLayout title={post.data.title} description={post.data.description}>
   <article class="post-article">
     <div class="container-narrow">
-      <a href="/tin-tuc/" class="back-link">← Tất cả tin tức</a>
+      <a href={`${import.meta.env.BASE_URL}tin-tuc/`} class="back-link">← Tất cả tin tức</a>
 
       <header class="post-header">
         {post.data.tags.length > 0 && (
@@ -38,7 +38,7 @@ const fmt = (d: Date) =>
       </div>
 
       <footer class="post-footer">
-        <a href="/tin-tuc/" class="btn btn-outline">← Tin tức khác</a>
+        <a href={`${import.meta.env.BASE_URL}tin-tuc/`} class="btn btn-outline">← Tin tức khác</a>
       </footer>
     </div>
   </article>

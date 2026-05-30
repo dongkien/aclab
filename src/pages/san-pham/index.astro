@@ -28,7 +28,7 @@ const fmt = (d: Date) =>
         {products.map(p => (
           <article class="card product-card">
             <span class="tag tag--accent">{typeLabel(p.data.type)}</span>
-            <h2><a href={`/san-pham/${p.id}/`}>{p.data.title}</a></h2>
+            <h2><a href={`${import.meta.env.BASE_URL}san-pham/${p.id}/`}>{p.data.title}</a></h2>
             {p.data.description && <p>{p.data.description}</p>}
             <p class="muted">{p.data.authors.join(' · ')} — {fmt(p.data.date)}</p>
           </article>

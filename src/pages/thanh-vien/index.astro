@@ -22,7 +22,7 @@ const initialOf = (name: string) => name.split(' ').slice(-1)[0][0];
         {members.map(m => (
           <article class="card member-card">
             <div class="avatar">{initialOf(m.data.name)}</div>
-            <h3><a href={`/thanh-vien/${m.id}/`}>{m.data.name}</a></h3>
+            <h3><a href={`${import.meta.env.BASE_URL}thanh-vien/${m.id}/`}>{m.data.name}</a></h3>
             <p class="role">{m.data.role}</p>
             {m.data.expertise.length > 0 && (
               <div class="tags">
