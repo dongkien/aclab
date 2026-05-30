@@ -1,10 +1,19 @@
 # AcLab+ — Website
 
-Trang web phòng thí nghiệm học thuật **AcLab+** (Kinh tế · Kinh doanh · Quản lý), dựng bằng **Astro** với **Decap CMS** quản trị nội dung qua web.
+Trang web phòng thí nghiệm học thuật **AcLab+** (Kinh tế · Kinh doanh · Quản lý),
+dựng bằng **Astro**, quản trị nội dung qua web bằng **Sveltia CMS**.
 
 ```
-Astro (static site)  →  GitHub (repo)  →  Netlify (auto-deploy + CMS auth)
+Astro (static)  →  GitHub (repo + Actions)  →  GitHub Pages
+                         ▲
+        Sveltia CMS /admin/ (đăng nhập GitHub qua Cloudflare Worker)
 ```
+
+🌐 **Live:** https://dongkien.github.io/aclab/
+🔐 **Quản trị:** https://dongkien.github.io/aclab/admin/
+
+> 📘 **Hướng dẫn vận hành đầy đủ** (deploy, CMS, form, xử lý sự cố) xem ở **[`HUONG-DAN.md`](./HUONG-DAN.md)**.
+> README này chỉ là tổng quan nhanh.
 
 ---
 
@@ -20,12 +29,14 @@ aclab/
 │   │   ├── posts/         .md — tin tức
 │   │   ├── members/       .md — thành viên
 │   │   └── products/      .md — ấn phẩm
-│   ├── content.config.ts  Schema (zod) cho 3 collection
 │   └── styles/global.css  Design system (CSS variables)
 ├── public/
-│   ├── admin/             Decap CMS (index.html + config.yml)
+│   ├── admin/             Sveltia CMS (index.html + config.yml)
 │   └── uploads/           Ảnh upload từ CMS
-├── netlify.toml           Cấu hình build
+├── .github/workflows/
+│   └── deploy.yml         GitHub Actions: build Astro + deploy Pages
+├── astro.config.mjs       site + base: '/aclab/'
+├── HUONG-DAN.md           Tài liệu vận hành chi tiết
 └── package.json
 ```
 
@@ -35,95 +46,43 @@ aclab/
 
 ```bash
 npm install         # cài lần đầu
-npm run dev         # dev server: http://localhost:4321
+npm run dev         # dev server: http://localhost:4321/aclab/
 npm run build       # build production → dist/
-npm run preview     # xem bản build
+npm run preview     # xem bản build: http://localhost:4321/aclab/
 ```
 
-### Chạy CMS local (không cần Netlify)
-
-```bash
-# Terminal 1
-npx decap-server          # proxy lưu thay đổi xuống ổ đĩa
-
-# Terminal 2
-npm run dev
-
-# Trong public/admin/config.yml, mở dòng `local_backend: true`
-```
-
-Mở http://localhost:4321/admin/index.html — chỉnh sửa, lưu, file `.md` cập nhật ngay trong `src/content/`.
+> ⚠️ Site phục vụ ở **đường dẫn con `/aclab/`** nên URL local cũng có `/aclab/`.
+> Mọi link nội bộ phải dùng `import.meta.env.BASE_URL` (xem helper `withBase()` trong
+> `src/components/`), **không** viết `href="/..."` tuyệt đối.
 
 ---
 
-## 🌐 Deploy lần đầu (làm 1 lần)
+## 🌐 Deploy
 
-### Bước 1 — Đưa code lên GitHub
+**Tự động:** mỗi lần đẩy lên nhánh `main` (kể cả khi lưu bài từ CMS),
+**GitHub Actions** tự build và deploy lên GitHub Pages. Không cần thao tác tay.
 
-```bash
-cd /home/kiendn/aclab
+- Workflow: `.github/workflows/deploy.yml` (yêu cầu **Node 22** — Astro 6 cần ≥ 22.12).
+- Pages **Source** = *GitHub Actions* (Settings → Pages).
 
-git init
-git add .
-git commit -m "Initial site"
-git branch -M main
-
-# Tạo repo trên github.com (Settings → New repository → tên: aclab-site)
-# rồi:
-git remote add origin https://github.com/<USERNAME>/aclab-site.git
-git push -u origin main
-```
-
-### Bước 2 — Kết nối Netlify
-
-1. Vào **https://app.netlify.com** → đăng nhập bằng GitHub.
-2. **Add new site → Import an existing project → GitHub** → chọn repo `aclab-site`.
-3. Netlify đọc `netlify.toml` ⇒ build command và publish folder đã đúng. **Deploy**.
-4. Khoảng 30 giây sau bạn có URL dạng `https://random-name.netlify.app`.
-
-### Bước 3 — Đổi tên Netlify subdomain (tùy chọn)
-
-Site settings → Domain management → Options → **Edit site name** → đổi thành `aclab` chẳng hạn → `aclab.netlify.app`.
-
-### Bước 4 — Trỏ tên miền `aclab.plus`
-
-1. Netlify: Domain management → **Add custom domain** → nhập `aclab.plus`.
-2. Trỏ DNS tại nhà cung cấp tên miền:
-   - Bản ghi **A** `@` → `75.2.60.5`
-   - Bản ghi **CNAME** `www` → `<tên-netlify>.netlify.app`
-3. Netlify tự cấp **SSL Let's Encrypt** trong 1–10 phút.
-
-### Bước 5 — Bật Decap CMS (Netlify Identity + Git Gateway)
-
-> **Quan trọng:** đây là bước phải làm để `/admin/` hoạt động được.
-
-1. Netlify dashboard → **Site configuration → Identity → Enable Identity**.
-2. **Identity → Registration**, chọn **Invite only** (chỉ admin mời được).
-3. Bật **Identity → Services → Git Gateway → Enable Git Gateway**.
-4. **Identity → Invite users** → mời `aclabecon@gmail.com` (hoặc email khác).
-5. Mở email → bấm link → đặt mật khẩu → tự động đẩy về `aclab.plus/admin/` → login.
-
-Từ giờ: đăng nhập `/admin/` → viết bài → Publish → Netlify auto-rebuild → bài lên ~30 giây sau.
+Chi tiết hạ tầng CMS (GitHub OAuth App + Cloudflare Worker) và form (Formspree):
+xem **[`HUONG-DAN.md`](./HUONG-DAN.md)**.
 
 ---
 
-## ✍️ Quy trình viết bài (sau khi deploy)
+## ✍️ Viết bài
 
 ### Cách 1 — Qua web (khuyên dùng)
-
-`aclab.plus/admin/` → Login → **Tin tức** (hoặc Thành viên / Ấn phẩm) → **New** → điền form → **Publish**.
-
-Với `publish_mode: editorial_workflow` (đã bật sẵn): bài đầu tiên sẽ ở trạng thái **Draft** → bạn duyệt rồi mới **Publish**.
+`…/admin/` → **Sign in with GitHub** → **Tin tức / Thành viên / Ấn phẩm** → soạn → **Publish**.
+Đang bật `editorial_workflow`: bài lưu thành bản nháp (PR) trước, duyệt rồi mới đăng.
 
 ### Cách 2 — Sửa file `.md` trực tiếp
-
 ```bash
 cp src/content/posts/welcome.md src/content/posts/bai-moi.md
-# sửa frontmatter và nội dung, rồi:
+# sửa frontmatter + nội dung, rồi:
 git add . && git commit -m "Bài mới: ..." && git push
 ```
-
-Netlify tự build và deploy sau ~30 giây.
+Actions tự build & deploy sau ~1 phút.
 
 ---
 
@@ -146,21 +105,9 @@ Toàn bộ design token nằm trong **`src/styles/global.css`** (đầu file):
 
 ---
 
-## 📋 Checklist sau deploy
-
-- [ ] `aclab.plus` mở được, HTTPS xanh.
-- [ ] Mọi trang trong nav hoạt động.
-- [ ] `/admin/` login được, viết thử một bài → hiện ra ở `/tin-tuc/`.
-- [ ] Form Liên hệ gửi được → Netlify dashboard → **Forms** → có submission.
-- [ ] Mời các admin khác qua **Identity → Invite users**.
-
----
-
 ## 🆘 Gặp lỗi?
 
-- **Build fail trên Netlify** → tab **Deploys → log**, thường do schema content không khớp.
-- **`/admin/` trắng** → chưa bật Identity hoặc chưa bật Git Gateway.
-- **Login `/admin/` được nhưng không lưu được** → Git Gateway chưa bật.
-- **Ảnh upload không hiện** → kiểm tra `media_folder: public/uploads` trong `config.yml`.
+Xem bảng xử lý sự cố trong **[`HUONG-DAN.md` §9](./HUONG-DAN.md)** (build fail Node, link hỏng,
+CMS redirect_uri mismatch, đăng nhập màn trắng…).
 
 📧 Liên hệ kỹ thuật: `aclabecon@gmail.com`
