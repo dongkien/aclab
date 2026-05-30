@@ -4,23 +4,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Quản trị nội dung · AcLab+</title>
-  <!-- Netlify Identity widget (cần khi bật Identity ở dashboard) -->
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
-  <!-- Decap CMS -->
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
-  <script>
-    // Sau khi đăng nhập lần đầu, đẩy người dùng vào /admin/ thay vì trang chủ
-    if (window.netlifyIdentity) {
-      window.netlifyIdentity.on("init", user => {
-        if (!user) {
-          window.netlifyIdentity.on("login", () => {
-            document.location.href = "/admin/";
-          });
-        }
-      });
-    }
-  </script>
+  <!-- Sveltia CMS — đọc cấu hình từ ./config.yml cùng thư mục -->
+  <script src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js" type="module"></script>
 </body>
 </html>

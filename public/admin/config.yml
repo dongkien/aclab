@@ -4,20 +4,20 @@
 # =============================================================
 
 backend:
-  name: git-gateway          # dùng Netlify Identity + Git Gateway
-  branch: main               # đổi nếu repo dùng branch khác
+  name: github               # đăng nhập bằng tài khoản GitHub
+  repo: dongkien/aclab       # owner/repo
+  branch: main
+  # OAuth proxy (Cloudflare Worker)
+  base_url: https://sveltia-cms-auth.dongockien.workers.dev
 
-# Khi muốn chạy thử local, bỏ comment 2 dòng dưới rồi `npx decap-server`
-# local_backend: true
+site_url: https://dongkien.github.io/aclab/
+display_url: https://dongkien.github.io/aclab/
+logo_url: /aclab/favicon.svg
 
-site_url: https://aclab.plus
-display_url: https://aclab.plus
-logo_url: /favicon.svg
+publish_mode: editorial_workflow   # lưu bài thành nháp (PR) trước khi đăng
 
-publish_mode: editorial_workflow   # tạo PR nháp thay vì đăng thẳng
-
-media_folder: "public/uploads"     # nơi lưu ảnh upload
-public_folder: "/uploads"          # URL công khai
+media_folder: "public/uploads"     # nơi lưu ảnh upload (trong repo)
+public_folder: "/aclab/uploads"    # URL công khai của ảnh trên site
 
 locale: vi
 
