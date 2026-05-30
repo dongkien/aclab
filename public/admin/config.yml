@@ -10,14 +10,14 @@ backend:
   # OAuth proxy (Cloudflare Worker)
   base_url: https://sveltia-cms-auth.dongockien.workers.dev
 
-site_url: https://dongkien.github.io/aclab/
-display_url: https://dongkien.github.io/aclab/
-logo_url: /aclab/favicon.svg
+site_url: https://aclab.plus/
+display_url: https://aclab.plus/
+logo_url: /favicon.svg
 
 publish_mode: editorial_workflow   # lưu bài thành nháp (PR) trước khi đăng
 
 media_folder: "public/uploads"     # nơi lưu ảnh upload (trong repo)
-public_folder: "/aclab/uploads"    # URL công khai của ảnh trên site
+public_folder: "/uploads"          # URL công khai của ảnh trên site
 
 locale: vi
 
