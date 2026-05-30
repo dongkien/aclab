@@ -43,6 +43,10 @@ const products = defineCollection({
     link: z.string().url().optional(),
     authors: z.array(z.string()).default([]),
     featured: z.boolean().default(false),
+    // --- Hạ tầng học thuật (working paper) ---
+    wp: z.string().optional(),          // mã số, vd "WP-AC-2026-01"
+    doi: z.string().optional(),         // vd "10.5281/zenodo.123456"
+    pdf: z.string().optional(),         // đường dẫn PDF (trong /public hoặc URL)
   }),
 });
 

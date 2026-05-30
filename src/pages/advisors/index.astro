@@ -1,0 +1,50 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Hội đồng Cố vấn"
+  description="Advisory Board của AcLab+ — các học giả đồng hành cùng định hướng học thuật của phòng thí nghiệm."
+>
+  <section class="page-hero">
+    <div class="container-narrow">
+      <p class="kicker">Advisory Board</p>
+      <h1>Hội đồng Cố vấn</h1>
+      <p class="lead">
+        AcLab+ đang xây dựng một Hội đồng Cố vấn gồm các học giả uy tín — ưu tiên người Việt
+        tại các đại học quốc tế, học giả Việt Nam có ảnh hưởng, và các nhà nghiên cứu quốc tế
+        quan tâm tới Đông Nam Á.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container-narrow">
+      <div class="placeholder-card">
+        <p class="ph-icon" aria-hidden="true">🎓</p>
+        <h2>Đang trong quá trình mời</h2>
+        <p>
+          Chúng tôi đang gửi thư mời tới các ứng viên đầu tiên. Danh sách thành viên Hội đồng
+          Cố vấn sẽ được công bố tại đây sau khi có xác nhận chính thức.
+        </p>
+        <p class="muted">
+          Quan tâm đồng hành cùng AcLab+? Liên hệ
+          <a href="mailto:aclabecon@gmail.com">aclabecon@gmail.com</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .page-hero { padding: 4rem 0 2rem; background: linear-gradient(180deg, var(--bg) 0%, var(--surface-2) 100%); border-bottom: 1px solid var(--border); }
+    .page-hero h1 { margin: .6rem 0 1rem; }
+    .placeholder-card {
+      text-align: center; padding: 3.5rem 2rem;
+      border: 1px dashed var(--border); border-radius: var(--radius-lg);
+      background: var(--surface);
+    }
+    .ph-icon { font-size: 2.6rem; margin: 0 0 .6rem; }
+    .placeholder-card h2 { margin: 0 0 .8rem; }
+    .placeholder-card p { color: var(--muted); max-width: 48ch; margin: 0 auto .6rem; line-height: 1.7; }
+  </style>
+</BaseLayout>

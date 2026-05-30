@@ -1,0 +1,111 @@
+% =====================================================================
+%  AcLab+ Working Paper — LaTeX template
+%  Series: AcLab+ Working Paper Series
+%  Compile: pdflatex (hoặc xelatex/lualatex nếu cần font tuỳ chỉnh)
+%  Đổi các trường trong phần "METADATA" bên dưới cho mỗi paper.
+% =====================================================================
+\documentclass[11pt,a4paper]{article}
+
+% ---------- Packages ----------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[english,vietnamese]{babel}   % bỏ 'vietnamese' nếu viết tiếng Anh thuần
+\usepackage[a4paper,margin=2.6cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage{titling}
+\usepackage[hidelinks]{hyperref}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{abstract}
+
+% ---------- Brand colors ----------
+\definecolor{aclabnavy}{HTML}{0F2747}
+\definecolor{aclabmarsala}{HTML}{8A2B2B}
+\hypersetup{colorlinks=true, linkcolor=aclabnavy, urlcolor=aclabmarsala, citecolor=aclabnavy}
+
+% =====================================================================
+%  METADATA — sửa cho mỗi paper
+% =====================================================================
+\newcommand{\wpnumber}{WP-AC-2026-01}
+\newcommand{\wptitle}{Tiêu đề working paper ở đây}
+\newcommand{\wpauthors}{Tác giả Một\thanks{AcLab+ và đơn vị; email.} \and Tác giả Hai\thanks{Đơn vị; email.}}
+\newcommand{\wpdate}{Tháng 5, 2026}
+\newcommand{\wpdoi}{10.5281/zenodo.XXXXXXX}        % cập nhật sau khi có DOI Zenodo
+\newcommand{\wpjel}{O47, E24, C23}                 % mã JEL
+\newcommand{\wpkeywords}{năng suất, tăng trưởng, Việt Nam}
+% =====================================================================
+
+% ---------- Header / footer ----------
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.4pt}
+\lhead{\footnotesize\textcolor{aclabnavy}{\textbf{AcLab+}} Working Paper Series}
+\rhead{\footnotesize \wpnumber}
+\cfoot{\thepage}
+
+\title{\vspace{-1cm}\textcolor{aclabnavy}{\textbf{\wptitle}}}
+\author{\wpauthors}
+\date{\wpdate}
+
+\begin{document}
+
+% ---------- Title block ----------
+\begin{titlepage}
+  \centering
+  {\footnotesize\textcolor{aclabmarsala}{\textbf{ACLAB+ WORKING PAPER SERIES \quad\textbullet\quad \wpnumber}}}\\[1.4cm]
+  {\LARGE\bfseries\textcolor{aclabnavy}{\wptitle}\par}\vspace{1.2cm}
+  {\large \wpauthors \par}\vspace{0.6cm}
+  {\wpdate}\\[0.4cm]
+  {\small DOI: \href{https://doi.org/\wpdoi}{\wpdoi}}\\[1.6cm]
+
+  \begin{abstract}
+  \noindent
+  % --- Tóm tắt (150–250 từ) ---
+  Tóm tắt nội dung nghiên cứu ở đây: câu hỏi, dữ liệu, phương pháp, phát hiện chính
+  và hàm ý chính sách.
+  \end{abstract}
+
+  \vspace{0.4cm}
+  \noindent\textbf{Từ khoá:} \wpkeywords \\
+  \noindent\textbf{Mã JEL:} \wpjel
+
+  \vfill
+  {\footnotesize\itshape
+  Working paper phản ánh quan điểm của tác giả, không phải quan điểm chính thức của AcLab+.
+  Phát hành theo giấy phép Creative Commons BY 4.0.}
+\end{titlepage}
+
+\onehalfspacing
+
+% =====================================================================
+%  NỘI DUNG
+% =====================================================================
+\section{Giới thiệu}
+\label{sec:intro}
+
+Mở đầu: bối cảnh, khoảng trống nghiên cứu, đóng góp của bài.
+
+\section{Tổng quan tài liệu}
+\label{sec:lit}
+
+\section{Dữ liệu và phương pháp}
+\label{sec:data}
+
+\section{Kết quả}
+\label{sec:results}
+
+\section{Thảo luận và hàm ý chính sách}
+\label{sec:discussion}
+
+\section{Kết luận}
+\label{sec:conclusion}
+
+% ---------- Tài liệu tham khảo ----------
+\bibliographystyle{apalike}   % hoặc plainnat / chicago
+% \bibliography{references}    % tạo file references.bib
+
+\end{document}

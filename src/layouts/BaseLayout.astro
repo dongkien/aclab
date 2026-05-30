@@ -38,6 +38,9 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://aclab.plus'
   <meta property="og:locale" content="vi_VN" />
   {image && <meta property="og:image" content={image} />}
   <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Trang con có thể chèn thêm thẻ <head> (vd: Google Scholar metatags) -->
+  <slot name="head" />
 </head>
 <body>
   <a href="#main" class="skip-link">Bỏ qua tới nội dung</a>

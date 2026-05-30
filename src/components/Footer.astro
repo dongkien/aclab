@@ -20,9 +20,9 @@ const withBase = (href: string) => import.meta.env.BASE_URL.replace(/\/$/, '') +
       <h4>Liên kết</h4>
       <ul>
         <li><a href={withBase('/gioi-thieu/')}>Giới thiệu</a></li>
-        <li><a href={withBase('/hoat-dong/')}>Hoạt động</a></li>
         <li><a href={withBase('/thanh-vien/')}>Thành viên</a></li>
-        <li><a href={withBase('/san-pham/')}>Sản phẩm</a></li>
+        <li><a href={withBase('/advisors/')}>Hội đồng Cố vấn</a></li>
+        <li><a href={withBase('/partners/')}>Đối tác</a></li>
       </ul>
     </div>
 
@@ -30,7 +30,9 @@ const withBase = (href: string) => import.meta.env.BASE_URL.replace(/\/$/, '') +
       <h4>Nội dung</h4>
       <ul>
         <li><a href={withBase('/tin-tuc/')}>Tin tức</a></li>
-        <li><a href={withBase('/tuyen-thanh-vien/')}>Tuyển thành viên</a></li>
+        <li><a href={withBase('/san-pham/')}>Ấn phẩm</a></li>
+        <li><a href={withBase('/chinh-sach-bien-tap/')}>Chính sách Biên tập</a></li>
+        <li><a href={withBase('/tin-tuc/rss.xml')}>RSS</a></li>
         <li><a href={withBase('/lien-he/')}>Liên hệ</a></li>
       </ul>
     </div>

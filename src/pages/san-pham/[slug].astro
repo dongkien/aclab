@@ -8,39 +8,118 @@ export async function getStaticPaths() {
 }
 
 const { product } = Astro.props;
+const d = product.data;
 const { Content } = await render(product);
 
 const typeLabel = (t: string) =>
   ({ book: 'Sách', paper: 'Working Paper', report: 'Báo cáo', other: 'Ấn phẩm' }[t] || t);
 
-const fmt = (d: Date) =>
-  d.toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric' });
+const fmt = (dt: Date) =>
+  dt.toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric' });
+
+const year = d.date.getFullYear();
+const isPaper = d.type === 'paper' || d.type === 'report';
+
+// URL tuyệt đối cho metadata học thuật
+const site = Astro.site ?? new URL('https://aclab.plus');
+const canonical = new URL(Astro.url.pathname, site).toString();
+const doiUrl = d.doi ? `https://doi.org/${d.doi}` : null;
+const pdfUrl = d.pdf ? (d.pdf.startsWith('http') ? d.pdf : new URL(d.pdf, site).toString()) : null;
+
+// Sinh BibTeX (@techreport cho working paper)
+const citeKey = ((d.authors[0]?.split(' ').pop() || 'AcLab') + year).replace(/[^A-Za-z0-9]/g, '');
+const bibtex = [
+  `@techreport{${citeKey},`,
+  `  title       = {${d.title}},`,
+  `  author      = {${d.authors.join(' and ')}},`,
+  `  institution = {AcLab+ — Academic Laboratory},`,
+  `  type        = {Working Paper},`,
+  d.wp ? `  number      = {${d.wp}},` : null,
+  `  year        = {${year}},`,
+  d.doi ? `  doi         = {${d.doi}},` : null,
+  `  url         = {${canonical}}`,
+  `}`,
+].filter(Boolean).join('\n');
 ---
 
-<BaseLayout title={product.data.title} description={product.data.description}>
+<BaseLayout title={d.title} description={d.description}>
+  {/* Google Scholar metatags — giúp paper được index đúng (chuẩn cho RePEc/Scholar) */}
+  {isPaper && (
+    <Fragment slot="head">
+      <meta name="citation_title" content={d.title} />
+      {d.authors.map(a => <meta name="citation_author" content={a} />)}
+      <meta name="citation_publication_date" content={d.date.toISOString().slice(0, 10).replace(/-/g, '/')} />
+      <meta name="citation_technical_report_institution" content="AcLab+ — Academic Laboratory" />
+      {d.wp && <meta name="citation_technical_report_number" content={d.wp} />}
+      {d.doi && <meta name="citation_doi" content={d.doi} />}
+      {pdfUrl && <meta name="citation_pdf_url" content={pdfUrl} />}
+      <meta name="citation_abstract_html_url" content={canonical} />
+    </Fragment>
+  )}
+
   <article class="product-article">
     <div class="container-narrow">
       <a href={`${import.meta.env.BASE_URL}san-pham/`} class="back-link">← Toàn bộ ấn phẩm</a>
 
       <header class="p-header">
-        <span class="tag tag--accent">{typeLabel(product.data.type)}</span>
-        <h1>{product.data.title}</h1>
-        {product.data.description && <p class="lead">{product.data.description}</p>}
+        <div class="p-tags">
+          <span class="tag tag--accent">{typeLabel(d.type)}</span>
+          {d.wp && <span class="wp-no">{d.wp}</span>}
+        </div>
+        <h1>{d.title}</h1>
+        {d.description && <p class="lead">{d.description}</p>}
         <p class="byline">
-          {product.data.authors.join(' · ')} · <time datetime={product.data.date.toISOString()}>{fmt(product.data.date)}</time>
+          {d.authors.join(' · ')} · <time datetime={d.date.toISOString()}>{fmt(d.date)}</time>
         </p>
-        {product.data.link && (
-          <a href={product.data.link} class="btn btn-primary" style="margin-top:1rem;">
-            Xem ấn phẩm bên ngoài ↗
-          </a>
-        )}
+
+        {/* Hàng nút học thuật */}
+        <div class="actions">
+          {doiUrl && (
+            <a href={doiUrl} class="badge badge--doi" target="_blank" rel="noopener">
+              DOI: {d.doi}
+            </a>
+          )}
+          {pdfUrl && <a href={pdfUrl} class="btn btn-primary" target="_blank" rel="noopener">Tải PDF ↓</a>}
+          {isPaper && (
+            <button class="btn btn-ghost" id="bibBtn" data-bib={bibtex}>Copy BibTeX</button>
+          )}
+          {d.link && <a href={d.link} class="btn btn-ghost" target="_blank" rel="noopener">Liên kết ngoài ↗</a>}
+        </div>
       </header>
+
+      {/* Nhúng PDF nếu là file nội bộ */}
+      {pdfUrl && d.pdf && !d.pdf.startsWith('http') && (
+        <embed src={pdfUrl} type="application/pdf" class="pdf-embed" />
+      )}
 
       <div class="prose">
         <Content />
       </div>
+
+      {/* Khối BibTeX (ẩn, hiện khi bấm) */}
+      {isPaper && (
+        <details class="bib-box">
+          <summary>Trích dẫn (BibTeX)</summary>
+          <pre id="bibPre">{bibtex}</pre>
+        </details>
+      )}
     </div>
   </article>
+
+  <script>
+    const btn = document.getElementById('bibBtn');
+    btn?.addEventListener('click', async () => {
+      const bib = btn.getAttribute('data-bib') || '';
+      try {
+        await navigator.clipboard.writeText(bib);
+        const old = btn.textContent;
+        btn.textContent = '✓ Đã copy';
+        setTimeout(() => (btn.textContent = old), 1800);
+      } catch {
+        document.getElementById('bibPre')?.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  </script>
 
   <style>
     .product-article { padding: 3rem 0 5rem; }
@@ -54,11 +133,51 @@ const fmt = (d: Date) =>
       padding-bottom: 1.8rem; margin-bottom: 2.4rem;
       border-bottom: 1px solid var(--border);
     }
+    .p-tags { display: flex; align-items: center; gap: .6rem; }
+    .wp-no {
+      font-family: var(--font-sans); font-size: .78rem; font-weight: 600;
+      letter-spacing: .04em; color: var(--muted);
+      border: 1px solid var(--border); border-radius: var(--radius);
+      padding: .15rem .5rem;
+    }
     .p-header h1 { margin: 1rem 0 .8rem; }
     .p-header .lead { color: var(--muted); margin: 0 0 1rem; }
     .byline {
       font-family: var(--font-sans); font-size: .9rem;
       color: var(--muted); margin: 0;
+    }
+    .actions {
+      display: flex; flex-wrap: wrap; gap: .7rem; align-items: center;
+      margin-top: 1.4rem;
+    }
+    .badge--doi {
+      font-family: var(--font-sans); font-size: .82rem; font-weight: 600;
+      background: var(--surface-2); color: var(--accent-2);
+      border: 1px solid var(--border); border-radius: var(--radius);
+      padding: .5rem .8rem; text-decoration: none;
+    }
+    .badge--doi:hover { border-color: var(--accent-2); }
+    .btn-ghost {
+      background: transparent; border: 1px solid var(--border); color: var(--text);
+    }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+    .pdf-embed {
+      width: 100%; height: 600px; border: 1px solid var(--border);
+      border-radius: var(--radius-lg); margin-bottom: 2.4rem;
+    }
+    .bib-box {
+      margin-top: 2.5rem; border: 1px solid var(--border);
+      border-radius: var(--radius); background: var(--surface);
+    }
+    .bib-box summary {
+      cursor: pointer; padding: .8rem 1rem;
+      font-family: var(--font-sans); font-weight: 600; font-size: .9rem;
+    }
+    .bib-box pre {
+      margin: 0; padding: 1rem; overflow-x: auto;
+      font-size: .82rem; line-height: 1.5;
+      border-top: 1px solid var(--border);
+      background: var(--bg);
     }
   </style>
 </BaseLayout>

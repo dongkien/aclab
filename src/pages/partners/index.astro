@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Đối tác"
+  description="Mạng lưới đối tác của AcLab+ — các viện, nhóm nghiên cứu và đại học hợp tác chính thức."
+>
+  <section class="page-hero">
+    <div class="container-narrow">
+      <p class="kicker">Partners</p>
+      <h1>Mạng lưới Đối tác</h1>
+      <p class="lead">
+        AcLab+ hợp tác với các viện nghiên cứu, nhóm học thuật và đại học trong và ngoài nước
+        thông qua các thoả thuận hợp tác (MOU / Letter of Cooperation), với cam kết có hoạt
+        động cụ thể: hội thảo chung, nghiên cứu đồng tác giả, trao đổi học giả.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container-narrow">
+      <div class="placeholder-card">
+        <p class="ph-icon" aria-hidden="true">🤝</p>
+        <h2>Đang thiết lập hợp tác</h2>
+        <p>
+          Những đối tác chính thức đầu tiên sẽ được công bố tại đây sau khi ký kết. Chúng tôi
+          chú trọng chất lượng hợp tác hơn số lượng — mỗi đối tác đi kèm ít nhất một hoạt động
+          chung trong 12 tháng.
+        </p>
+        <p class="muted">
+          Đề xuất hợp tác? Liên hệ
+          <a href="mailto:aclabecon@gmail.com">aclabecon@gmail.com</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .page-hero { padding: 4rem 0 2rem; background: linear-gradient(180deg, var(--bg) 0%, var(--surface-2) 100%); border-bottom: 1px solid var(--border); }
+    .page-hero h1 { margin: .6rem 0 1rem; }
+    .placeholder-card {
+      text-align: center; padding: 3.5rem 2rem;
+      border: 1px dashed var(--border); border-radius: var(--radius-lg);
+      background: var(--surface);
+    }
+    .ph-icon { font-size: 2.6rem; margin: 0 0 .6rem; }
+    .placeholder-card h2 { margin: 0 0 .8rem; }
+    .placeholder-card p { color: var(--muted); max-width: 48ch; margin: 0 auto .6rem; line-height: 1.7; }
+  </style>
+</BaseLayout>
