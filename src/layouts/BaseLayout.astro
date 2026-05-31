@@ -30,6 +30,9 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://aclab.plus'
   <link rel="canonical" href={canonical.toString()} />
   <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}favicon.svg`} />
 
+  <!-- Computer Modern (font LaTeX) — dùng cho tagline logo -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/font/Serif/cmun-serif.css" />
+
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content={fullTitle} />
