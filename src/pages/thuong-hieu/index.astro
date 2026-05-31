@@ -5,6 +5,14 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout title="Nhận diện thương hiệu" description="Bộ nhận diện thương hiệu AcLab+ — logo, màu sắc, typography.">
+  <Fragment slot="head">
+    <!-- Font LaTeX (Computer Modern) + các font monospace/serif để so sánh wordmark -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Serif:wght@600&family=JetBrains+Mono:wght@600&family=Space+Mono:wght@700&family=EB+Garamond:wght@600&display=swap" rel="stylesheet" />
+  </Fragment>
+
   <section class="page-hero">
     <div class="container-narrow">
       <p class="kicker">Brand · Bản nháp để chọn</p>
@@ -16,6 +24,23 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
   <section class="section">
     <div class="container">
+
+      <!-- ============ PHÔNG CHỮ CHO WORDMARK "AcLab+" ============ -->
+      <div class="concept">
+        <h2>Phông chữ cho chữ “AcLab+”</h2>
+        <p class="desc">Cùng chữ “AcLab+” render bằng các font khác nhau. Font quyết định "chất" của thương hiệu:
+          LaTeX = học thuật cổ điển, monospace = lab/code. Chọn font bạn thích để mình áp vào wordmark.</p>
+        <div class="fonts">
+          <div class="fitem"><span class="wm" style="font-family:'Computer Modern Serif',serif">AcLab<i>+</i></span><label>Computer Modern <b>— đúng font LaTeX (serif)</b></label></div>
+          <div class="fitem hi"><span class="wm" style="font-family:'Computer Modern Typewriter',monospace">AcLab<i>+</i></span><label>CM Typewriter <b>— font máy chữ LaTeX (vừa LaTeX vừa terminal) ⭐</b></label></div>
+          <div class="fitem"><span class="wm" style="font-family:'JetBrains Mono',monospace">AcLab<i>+</i></span><label>JetBrains Mono — terminal/code hiện đại</label></div>
+          <div class="fitem"><span class="wm" style="font-family:'IBM Plex Mono',monospace">AcLab<i>+</i></span><label>IBM Plex Mono — monospace tinh tế (hệ IBM Plex)</label></div>
+          <div class="fitem"><span class="wm" style="font-family:'Space Mono',monospace">AcLab<i>+</i></span><label>Space Mono — monospace retro, cá tính</label></div>
+          <div class="fitem"><span class="wm" style="font-family:'IBM Plex Serif',serif">AcLab<i>+</i></span><label>IBM Plex Serif — serif học thuật, cặp với Plex Mono</label></div>
+          <div class="fitem"><span class="wm" style="font-family:'EB Garamond',serif">AcLab<i>+</i></span><label>EB Garamond — serif cổ điển tạp chí</label></div>
+          <div class="fitem"><span class="wm" style="font-family:var(--font-sans)">AcLab<i>+</i></span><label>Be Vietnam Pro — hiện tại (sans)</label></div>
+        </div>
+      </div>
 
       <!-- ============ PHƯƠNG ÁN 1 — BADGE ============ -->
       <div class="concept">
@@ -172,5 +197,21 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     .color code { color: var(--muted); }
     .type-serif { font-family: var(--font-serif); font-size: 1.5rem; margin: .4rem 0; }
     .type-sans { font-family: var(--font-sans); font-size: 1.5rem; font-weight: 600; margin: .4rem 0; }
+
+    .fonts { display: flex; flex-direction: column; gap: .2rem; }
+    .fitem {
+      display: flex; align-items: baseline; gap: 1.4rem; flex-wrap: wrap;
+      padding: 1rem 1.1rem; border-radius: var(--radius);
+      border-bottom: 1px solid var(--border-soft);
+    }
+    .fitem.hi { background: var(--surface-2); border: 1px solid var(--accent-2); border-radius: var(--radius-lg); }
+    .fitem .wm {
+      font-size: 2.6rem; font-weight: 600; color: var(--accent);
+      min-width: 5.5ch; line-height: 1.1;
+    }
+    .fitem .wm i { color: var(--accent-2); font-style: normal; }
+    .fitem label { font-family: var(--font-sans); font-size: .9rem; color: var(--muted); }
+    .fitem label b { color: var(--text); font-weight: 600; }
+    @media (max-width: 600px) { .fitem .wm { font-size: 2.1rem; } }
   </style>
 </BaseLayout>
