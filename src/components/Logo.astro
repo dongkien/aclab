@@ -1,56 +1,46 @@
 ---
-// Logo AcLab+ — WORDMARK thuần chữ, font LaTeX (Computer Modern).
-// Không vẽ icon đặt-tọa-độ. Chỉ dùng chữ + canh giữa bằng flexbox → không thể lệch.
-// Trang dùng phải nạp font 'Computer Modern Serif'
-// (<head>: https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css)
+// Logo AcLab+ — biểu tượng chính là "A+" (nghĩa: điểm A+, xuất sắc).
+// Dùng ĐÚNG font + kiểu của logo header góc trên trái: Be Vietnam Pro, ô vuông navy,
+// A trắng + dấu + vàng. Canh giữa bằng flexbox (giống header → render chuẩn).
 interface Props {
   theme?: 'light' | 'dark';
-  size?: number;        // cỡ chữ "AcLab+" (px); với icon là cạnh ô vuông (px)
-  tagline?: boolean;
-  intl?: boolean;
-  icon?: boolean;       // ô vuông "A+" (favicon / avatar)
+  size?: number;        // cạnh ô "A+" (px)
+  iconOnly?: boolean;   // chỉ biểu tượng A+
+  intl?: boolean;       // wordmark "AcLab+ Int'"
 }
-const { theme = 'light', size = 40, tagline = false, intl = false, icon = false } = Astro.props;
-const ink  = theme === 'dark' ? '#FFFFFF' : '#0F2747';
-const plus = theme === 'dark' ? '#FFD47A' : '#8A2B2B';
-const tagc = theme === 'dark' ? '#AEB6C8' : '#7A8499';
-const tileBg = theme === 'dark' ? '#FFFFFF' : '#0F2747';
-const tileInk = theme === 'dark' ? '#0F2747' : '#FFFFFF';
-const tilePlus = theme === 'dark' ? '#8A2B2B' : '#FFD47A';
+const { theme = 'light', size = 48, iconOnly = false, intl = false } = Astro.props;
+const tileBg  = theme === 'dark' ? '#FFFFFF' : '#0F2747';
+const tileA   = theme === 'dark' ? '#0F2747' : '#FFFFFF';
+const tileP   = '#FFD47A';                                   // dấu + trên ô: vàng gold
+const wordInk = theme === 'dark' ? '#FFFFFF' : '#0F2747';
+const wordP   = theme === 'dark' ? '#FFD47A' : '#8A2B2B';    // dấu + trong chữ: marsala (nền tối → vàng)
+const intInk  = theme === 'dark' ? '#AEB6C8' : '#8A2B2B';
 ---
 
-{icon ? (
-  <span class="aclab-icon" style={`--s:${size}px; background:${tileBg}; color:${tileInk}`}>
-    A<span class="ic-plus" style={`color:${tilePlus}`}>+</span>
+<span class={`aclab ${iconOnly ? 'only' : ''}`} style={`--s:${size}px`}>
+  <span class="badge" style={`background:${tileBg}; color:${tileA}`}>
+    A<span class="bp" style={`color:${tileP}`}>+</span>
   </span>
-) : (
-  <span class="aclab-logo" style={`--s:${size}px`}>
-    <span class="name" style={`color:${ink}`}>AcLab<span class="plus" style={`color:${plus}`}>+</span>{intl && <span class="intl"> International</span>}</span>
-    {tagline && <span class="tag" style={`color:${tagc}`}>{intl ? 'International Academic Laboratory' : 'Academic Laboratory'}</span>}
-  </span>
-)}
+  {!iconOnly && (
+    <span class="wm" style={`color:${wordInk}`}>AcLab<span class="wp" style={`color:${wordP}`}>+</span>{intl && <span class="int" style={`color:${intInk}`}> Int’</span>}</span>
+  )}
+</span>
 
 <style>
-  .aclab-logo { display: inline-flex; flex-direction: column; line-height: 1.04; }
-  .aclab-logo .name {
-    font-family: 'Computer Modern Serif', Georgia, serif;
-    font-weight: 700; font-size: var(--s); letter-spacing: .003em;
-  }
-  .aclab-logo .plus { font-weight: 700; margin-left: .03em; }
-  .aclab-logo .intl { font-weight: 400; font-style: italic; font-size: .6em; letter-spacing: .01em; }
-  .aclab-logo .tag {
-    font-family: 'Be Vietnam Pro', system-ui, sans-serif;
-    font-weight: 500; font-size: calc(var(--s) * .25);
-    letter-spacing: .2em; text-transform: uppercase; margin-top: .55em;
-  }
-  /* Ô vuông "A+" — canh giữa bằng flexbox, không tọa độ tay */
-  .aclab-icon {
-    font-family: 'Computer Modern Serif', Georgia, serif;
-    font-weight: 700; font-size: calc(var(--s) * .56);
-    width: var(--s); height: var(--s);
+  .aclab { display: inline-flex; align-items: center; gap: calc(var(--s) * .26); line-height: 1; }
+  .aclab.only { gap: 0; }
+  .badge {
+    width: var(--s); height: var(--s); flex: none;
     border-radius: calc(var(--s) * .2);
     display: inline-flex; align-items: center; justify-content: center;
-    padding-right: .04em; /* bù quang học do dấu + lệch phải */
+    font-family: var(--font-sans); font-weight: 700;
+    font-size: calc(var(--s) * .5); letter-spacing: -.03em;
+    padding-right: calc(var(--s) * .03);
   }
-  .aclab-icon .ic-plus { margin-left: .02em; }
+  .badge .bp { margin-left: .03em; }
+  .wm {
+    font-family: var(--font-sans); font-weight: 700;
+    font-size: calc(var(--s) * .66); letter-spacing: -.01em;
+  }
+  .wm .int { font-weight: 600; font-size: .68em; letter-spacing: 0; }
 </style>

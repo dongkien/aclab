@@ -1,63 +1,58 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Logo from '../../components/Logo.astro';
-// Nhận diện AcLab+ — wordmark thuần chữ, font LaTeX (Computer Modern).
+// Nhận diện AcLab+ — biểu tượng chính "A+" (điểm A+ / xuất sắc), font Be Vietnam Pro (như header).
 ---
 
-<BaseLayout title="Nhận diện thương hiệu" description="Logo AcLab+ — wordmark font LaTeX Computer Modern.">
-  <Fragment slot="head">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css" />
-  </Fragment>
-
+<BaseLayout title="Nhận diện thương hiệu" description="Logo AcLab+ — biểu tượng A+ tượng trưng cho sự xuất sắc.">
   <section class="page-hero">
     <div class="container-narrow">
       <p class="kicker">Brand</p>
-      <h1>Logo AcLab+</h1>
-      <p class="lead">Logo thuần chữ, đặt bằng font LaTeX <strong>Computer Modern</strong>. Dấu
-        <strong>+</strong> (màu marsala) luôn đi liền sau “AcLab”. Đơn giản, học thuật, dùng tốt ở mọi kích cỡ.</p>
+      <h1>Biểu tượng <span class="hl">A+</span></h1>
+      <p class="lead">Logo lấy <strong>“A+”</strong> làm trung tâm — gợi ngay <strong>điểm A+</strong>:
+        sự xuất sắc, vượt trội. Một biểu tượng mà học viên, sinh viên nhìn là muốn hướng tới.
+        Dùng đúng font của logo trên thanh điều hướng (Be Vietnam Pro).</p>
     </div>
   </section>
 
   <section class="section">
     <div class="container-narrow">
 
-      <!-- Logo chính -->
+      <!-- Biểu tượng A+ là chính -->
       <div class="block">
-        <h2>Logo chính</h2>
+        <h2>Biểu tượng chính</h2>
+        <div class="hero-mark">
+          <div class="stage light big"><Logo iconOnly={true} size={140} /></div>
+          <div class="stage dark big"><Logo iconOnly={true} size={140} theme="dark" /></div>
+        </div>
+        <div class="stage light row" style="margin-top:1.2rem">
+          <Logo iconOnly={true} size={88} />
+          <Logo iconOnly={true} size={56} />
+          <Logo iconOnly={true} size={36} />
+          <span class="cap">Thu nhỏ vẫn rõ — hợp favicon, avatar</span>
+        </div>
+      </div>
+
+      <!-- Logo đầy đủ -->
+      <div class="block">
+        <h2>Logo đầy đủ (biểu tượng + chữ)</h2>
         <div class="grid2">
-          <div class="stage light"><Logo size={56} tagline={true} /></div>
-          <div class="stage dark"><Logo size={56} theme="dark" tagline={true} /></div>
+          <div class="stage light"><Logo size={54} /></div>
+          <div class="stage dark"><Logo size={54} theme="dark" /></div>
+        </div>
+        <div class="stage light row" style="margin-top:1.2rem">
+          <Logo size={40} /><Logo size={28} />
+          <span class="cap">Bản ngang ở cỡ nhỏ</span>
         </div>
       </div>
 
-      <!-- Gọn (không tagline) + kích cỡ nhỏ -->
+      <!-- Sub-logo Int' -->
       <div class="block">
-        <h2>Bản gọn &amp; thu nhỏ</h2>
-        <div class="stage light row">
-          <Logo size={40} />
-          <Logo size={28} />
-          <Logo size={20} />
-        </div>
-      </div>
-
-      <!-- Icon vuông -->
-      <div class="block">
-        <h2>Icon “A+” (favicon / avatar)</h2>
-        <p class="desc">Rút gọn còn “A+” cho ô vuông nhỏ — tab trình duyệt, avatar mạng xã hội.</p>
-        <div class="stage light row">
-          <Logo icon={true} size={84} />
-          <Logo icon={true} size={56} />
-          <Logo icon={true} size={36} theme="dark" />
-        </div>
-      </div>
-
-      <!-- Sub-logo International -->
-      <div class="block">
-        <h2>Sub-logo — AcLab+ International</h2>
-        <p class="desc">Thêm chữ <em>International</em> (in nghiêng, cùng font LaTeX) cho hoạt động đối ngoại quốc tế.</p>
+        <h2>Sub-logo — AcLab+ Int’</h2>
+        <p class="desc">Bản quốc tế, viết tắt <strong>Int’</strong> (International) — gọn, dùng cho đối ngoại.</p>
         <div class="grid2">
-          <div class="stage light"><Logo size={48} intl={true} tagline={true} /></div>
-          <div class="stage dark"><Logo size={48} intl={true} theme="dark" tagline={true} /></div>
+          <div class="stage light"><Logo size={50} intl={true} /></div>
+          <div class="stage dark"><Logo size={50} intl={true} theme="dark" /></div>
         </div>
       </div>
 
@@ -77,20 +72,23 @@ import Logo from '../../components/Logo.astro';
 
   <style>
     .page-hero { padding: 4rem 0 2rem; background: linear-gradient(180deg, var(--bg) 0%, var(--surface-2) 100%); border-bottom: 1px solid var(--border); }
-    .page-hero h1 { margin: .6rem 0 1rem; }
+    .page-hero h1 { margin: .6rem 0 1rem; font-size: 2.4rem; }
+    .page-hero .hl { color: var(--accent-2); }
     .block { padding: 2.2rem 0; border-bottom: 1px solid var(--border); }
     .block h2 { margin: 0 0 1rem; }
     .desc { color: var(--muted); max-width: 56ch; margin: -.4rem 0 1.2rem; }
-    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
-    @media (max-width: 700px){ .grid2 { grid-template-columns: 1fr; } }
+    .hero-mark, .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+    @media (max-width: 700px){ .hero-mark, .grid2 { grid-template-columns: 1fr; } }
     .stage {
-      border-radius: var(--radius-lg); padding: 2.6rem 2rem;
-      display: flex; align-items: center; justify-content: center; gap: 2.5rem; flex-wrap: wrap;
+      border-radius: var(--radius-lg); padding: 2.4rem 2rem;
+      display: flex; align-items: center; justify-content: center; gap: 2rem; flex-wrap: wrap;
       min-height: 120px;
     }
+    .stage.big { padding: 3rem 2rem; }
     .stage.row { justify-content: flex-start; }
     .stage.light { background: #fff; border: 1px solid var(--border); }
     .stage.dark { background: #0F2747; }
+    .cap { font-family: var(--font-sans); font-size: .82rem; color: var(--muted); }
     .palette { display: flex; flex-wrap: wrap; gap: 1.2rem; }
     .color { display: flex; flex-direction: column; gap: .3rem; font-family: var(--font-sans); font-size: .85rem; }
     .color span { width: 88px; height: 60px; border-radius: 10px; display: block; }
