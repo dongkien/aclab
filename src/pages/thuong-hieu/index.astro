@@ -46,13 +46,24 @@ import Logo from '../../components/Logo.astro';
         </div>
       </div>
 
-      <!-- Sub-logo Int' -->
+      <!-- Sub-logo Int' — bản "AI" -->
       <div class="block">
-        <h2>Sub-logo — AcLab+ Int’</h2>
-        <p class="desc">Bản quốc tế, viết tắt <strong>Int’</strong> (International) — gọn, dùng cho đối ngoại.</p>
+        <h2>Sub-logo “AcLab+ Int’” — ẩn ý <span class="hl">AI</span></h2>
+        <p class="desc">Chữ <strong>A</strong> và <strong>I</strong> phóng to, kéo sát nhau để đọc thành
+          <strong>“AI”</strong>; phần “cLab+” và “nt’” thu nhỏ. Vừa là AcLab+ International, vừa gợi trí tuệ nhân tạo.</p>
         <div class="grid2">
-          <div class="stage light"><Logo size={50} intl={true} /></div>
-          <div class="stage dark"><Logo size={50} intl={true} theme="dark" /></div>
+          <div class="stage light"><Logo size={64} intl="short" /></div>
+          <div class="stage dark"><Logo size={64} intl="short" theme="dark" /></div>
+        </div>
+      </div>
+
+      <!-- Bản đầy đủ International -->
+      <div class="block">
+        <h2>Bản đầy đủ — AcLab+ International</h2>
+        <p class="desc">Chữ <strong>International</strong> dùng font LaTeX (Computer Modern), đặt dưới “AcLab+”.</p>
+        <div class="grid2">
+          <div class="stage light"><Logo size={56} intl="full" /></div>
+          <div class="stage dark"><Logo size={56} intl="full" theme="dark" /></div>
         </div>
       </div>
 

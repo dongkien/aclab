@@ -1,28 +1,43 @@
 ---
-// Logo AcLab+ — biểu tượng chính là "A+" (nghĩa: điểm A+, xuất sắc).
-// Dùng ĐÚNG font + kiểu của logo header góc trên trái: Be Vietnam Pro, ô vuông navy,
-// A trắng + dấu + vàng. Canh giữa bằng flexbox (giống header → render chuẩn).
+// Logo AcLab+ — biểu tượng chính "A+" (điểm A+). Font Be Vietnam Pro (như header).
+// intl:
+//   'short' → "AcLab+ Int'": A và I to + sát nhau (đọc như "AI"), cLab+ / nt' nhỏ.
+//   'full'  → "AcLab+" với "International" (font LaTeX) đặt bên dưới.
 interface Props {
   theme?: 'light' | 'dark';
-  size?: number;        // cạnh ô "A+" (px)
-  iconOnly?: boolean;   // chỉ biểu tượng A+
-  intl?: boolean;       // wordmark "AcLab+ Int'"
+  size?: number;                 // cạnh ô "A+" (px)
+  iconOnly?: boolean;
+  intl?: 'short' | 'full' | false;
 }
 const { theme = 'light', size = 48, iconOnly = false, intl = false } = Astro.props;
 const tileBg  = theme === 'dark' ? '#FFFFFF' : '#0F2747';
 const tileA   = theme === 'dark' ? '#0F2747' : '#FFFFFF';
-const tileP   = '#FFD47A';                                   // dấu + trên ô: vàng gold
-const wordInk = theme === 'dark' ? '#FFFFFF' : '#0F2747';
-const wordP   = theme === 'dark' ? '#FFD47A' : '#8A2B2B';    // dấu + trong chữ: marsala (nền tối → vàng)
-const intInk  = theme === 'dark' ? '#AEB6C8' : '#8A2B2B';
+const tileP   = '#FFD47A';
+const ink     = theme === 'dark' ? '#FFFFFF' : '#0F2747';
+const wordP   = theme === 'dark' ? '#FFD47A' : '#8A2B2B';
+const intInk  = theme === 'dark' ? '#AEB6C8' : '#5a6275';
 ---
 
 <span class={`aclab ${iconOnly ? 'only' : ''}`} style={`--s:${size}px`}>
   <span class="badge" style={`background:${tileBg}; color:${tileA}`}>
     A<span class="bp" style={`color:${tileP}`}>+</span>
   </span>
-  {!iconOnly && (
-    <span class="wm" style={`color:${wordInk}`}>AcLab<span class="wp" style={`color:${wordP}`}>+</span>{intl && <span class="int" style={`color:${intInk}`}> Int’</span>}</span>
+
+  {!iconOnly && intl === 'short' && (
+    <span class="wm ai" style={`color:${ink}`}>
+      <span class="big">A</span><span class="sml">cLab<span style={`color:${wordP}`}>+</span></span><span class="big gap">I</span><span class="sml">nt’</span>
+    </span>
+  )}
+
+  {!iconOnly && intl === 'full' && (
+    <span class="wm stack" style={`color:${ink}`}>
+      <span class="name">AcLab<span style={`color:${wordP}`}>+</span></span>
+      <span class="intl-full" style={`color:${intInk}`}>International</span>
+    </span>
+  )}
+
+  {!iconOnly && !intl && (
+    <span class="wm" style={`color:${ink}`}>AcLab<span style={`color:${wordP}`}>+</span></span>
   )}
 </span>
 
@@ -38,9 +53,21 @@ const intInk  = theme === 'dark' ? '#AEB6C8' : '#8A2B2B';
     padding-right: calc(var(--s) * .03);
   }
   .badge .bp { margin-left: .03em; }
-  .wm {
-    font-family: var(--font-sans); font-weight: 700;
-    font-size: calc(var(--s) * .66); letter-spacing: -.01em;
+
+  /* Wordmark thường */
+  .wm { font-family: var(--font-sans); font-weight: 700; font-size: calc(var(--s) * .66); letter-spacing: -.01em; }
+
+  /* Bản "AI": A và I to, cLab+ / nt' nhỏ và sát */
+  .wm.ai { display: inline-flex; align-items: baseline; font-size: calc(var(--s) * .9); letter-spacing: -.02em; }
+  .wm.ai .big { font-weight: 700; font-size: 1em; }
+  .wm.ai .sml { font-weight: 600; font-size: .42em; letter-spacing: -.01em; }
+  .wm.ai .gap { margin-left: -.02em; }   /* kéo I sát lại gần A */
+
+  /* Bản đầy đủ: International (font LaTeX) ở dưới */
+  .wm.stack { display: inline-flex; flex-direction: column; }
+  .wm.stack .name { font-weight: 700; font-size: calc(var(--s) * .66); letter-spacing: -.01em; }
+  .wm.stack .intl-full {
+    font-family: 'Computer Modern Serif', Georgia, serif; font-weight: 400;
+    font-size: calc(var(--s) * .34); letter-spacing: .02em; margin-top: .15em;
   }
-  .wm .int { font-weight: 600; font-size: .68em; letter-spacing: 0; }
 </style>
