@@ -1,80 +1,56 @@
 ---
-// Logo AcLab+ — dùng chung cho web + mọi ấn phẩm.
-// Chữ "A+" và "AcLab+" dùng font LaTeX (Computer Modern). Dấu + LUÔN đi kèm A/AcLab+.
-// Yêu cầu: trang dùng component này phải nạp font 'Computer Modern Serif'
-// (link trong <head>: https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css)
+// Logo AcLab+ — WORDMARK thuần chữ, font LaTeX (Computer Modern).
+// Không vẽ icon đặt-tọa-độ. Chỉ dùng chữ + canh giữa bằng flexbox → không thể lệch.
+// Trang dùng phải nạp font 'Computer Modern Serif'
+// (<head>: https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css)
 interface Props {
-  theme?: 'light' | 'dark';     // light = logo tối trên nền sáng; dark = logo sáng trên nền tối
-  size?: number;                // chiều cao mark (px)
-  tagline?: boolean;            // hiện "Academic Laboratory"
-  intl?: boolean;               // sub-logo: AcLab+ International
-  iconOnly?: boolean;           // chỉ hiện mark vuông
-  variant?: 'badge' | 'open';   // badge = khối vuông; open = chữ A+ trần
+  theme?: 'light' | 'dark';
+  size?: number;        // cỡ chữ "AcLab+" (px); với icon là cạnh ô vuông (px)
+  tagline?: boolean;
+  intl?: boolean;
+  icon?: boolean;       // ô vuông "A+" (favicon / avatar)
 }
-const {
-  theme = 'light', size = 44, tagline = true, intl = false, iconOnly = false, variant = 'badge',
-} = Astro.props;
-
-const tile   = theme === 'dark' ? '#FFFFFF' : '#0F2747';
-const letter = theme === 'dark' ? '#0F2747' : '#FFFFFF';
-const plusIc = theme === 'dark' ? '#FFD47A' : '#FFD47A';   // dấu + trên mark: vàng
-const word   = theme === 'dark' ? '#FFFFFF' : '#0F2747';
-const plusWd = theme === 'dark' ? '#FFD47A' : '#8A2B2B';   // dấu + trong wordmark: marsala (nền tối → vàng)
-const tag    = theme === 'dark' ? '#AEB6C8' : '#7A8499';
-const openA  = theme === 'dark' ? '#FFFFFF' : '#0F2747';
+const { theme = 'light', size = 40, tagline = false, intl = false, icon = false } = Astro.props;
+const ink  = theme === 'dark' ? '#FFFFFF' : '#0F2747';
+const plus = theme === 'dark' ? '#FFD47A' : '#8A2B2B';
+const tagc = theme === 'dark' ? '#AEB6C8' : '#7A8499';
+const tileBg = theme === 'dark' ? '#FFFFFF' : '#0F2747';
+const tileInk = theme === 'dark' ? '#0F2747' : '#FFFFFF';
+const tilePlus = theme === 'dark' ? '#8A2B2B' : '#FFD47A';
 ---
 
-<span class={`aclab-logo ${iconOnly ? 'icon-only' : ''}`} style={`--mk:${size}px`}>
-  {/* ---------- MARK ---------- */}
-  {variant === 'badge' ? (
-    <svg class="mark" viewBox="0 0 100 100" aria-hidden="true">
-      <rect x="3" y="3" width="94" height="94" rx="21" fill={tile} />
-      <text x="45" y="72" text-anchor="middle" fill={letter}
-            font-family="'Computer Modern Serif', serif" font-size="68">A</text>
-      <text x="79" y="42" text-anchor="middle" fill={plusIc}
-            font-family="'Computer Modern Serif', serif" font-size="38">+</text>
-    </svg>
-  ) : (
-    <svg class="mark mark--open" viewBox="0 0 110 100" aria-hidden="true">
-      <text x="34" y="74" text-anchor="middle" fill={openA}
-            font-family="'Computer Modern Serif', serif" font-size="84">A</text>
-      <text x="86" y="50" text-anchor="middle" fill={theme === 'dark' ? '#FFD47A' : '#8A2B2B'}
-            font-family="'Computer Modern Serif', serif" font-size="50">+</text>
-    </svg>
-  )}
-
-  {/* ---------- WORDMARK ---------- */}
-  {!iconOnly && (
-    <span class="wm" style={`color:${word}`}>
-      <span class="name">AcLab<span class="plus" style={`color:${plusWd}`}>+</span>{intl && <span class="intl"> International</span>}</span>
-      {tagline && <small style={`color:${tag}`}>{intl ? 'International Academic Laboratory' : 'Academic Laboratory'}</small>}
-    </span>
-  )}
-</span>
+{icon ? (
+  <span class="aclab-icon" style={`--s:${size}px; background:${tileBg}; color:${tileInk}`}>
+    A<span class="ic-plus" style={`color:${tilePlus}`}>+</span>
+  </span>
+) : (
+  <span class="aclab-logo" style={`--s:${size}px`}>
+    <span class="name" style={`color:${ink}`}>AcLab<span class="plus" style={`color:${plus}`}>+</span>{intl && <span class="intl"> International</span>}</span>
+    {tagline && <span class="tag" style={`color:${tagc}`}>{intl ? 'International Academic Laboratory' : 'Academic Laboratory'}</span>}
+  </span>
+)}
 
 <style>
-  .aclab-logo { display: inline-flex; align-items: center; gap: .55em; line-height: 1; }
-  .aclab-logo .mark { height: var(--mk); width: auto; display: block; flex: none; }
-  .aclab-logo .wm { display: flex; flex-direction: column; }
+  .aclab-logo { display: inline-flex; flex-direction: column; line-height: 1.04; }
   .aclab-logo .name {
     font-family: 'Computer Modern Serif', Georgia, serif;
-    font-weight: 600;
-    font-size: calc(var(--mk) * 0.62);
-    letter-spacing: .01em;
+    font-weight: 700; font-size: var(--s); letter-spacing: .003em;
   }
-  .aclab-logo .plus { font-weight: 700; }
-  .aclab-logo .intl {
-    font-family: 'Computer Modern Serif', Georgia, serif;
-    font-weight: 400; font-style: italic;
-    font-size: calc(var(--mk) * 0.42);
-    letter-spacing: .02em;
-  }
-  .aclab-logo small {
+  .aclab-logo .plus { font-weight: 700; margin-left: .03em; }
+  .aclab-logo .intl { font-weight: 400; font-style: italic; font-size: .6em; letter-spacing: .01em; }
+  .aclab-logo .tag {
     font-family: 'Be Vietnam Pro', system-ui, sans-serif;
-    font-weight: 500;
-    font-size: calc(var(--mk) * 0.17);
-    letter-spacing: .16em; text-transform: uppercase;
-    margin-top: .35em;
+    font-weight: 500; font-size: calc(var(--s) * .25);
+    letter-spacing: .2em; text-transform: uppercase; margin-top: .55em;
   }
-  .aclab-logo.icon-only { gap: 0; }
+  /* Ô vuông "A+" — canh giữa bằng flexbox, không tọa độ tay */
+  .aclab-icon {
+    font-family: 'Computer Modern Serif', Georgia, serif;
+    font-weight: 700; font-size: calc(var(--s) * .56);
+    width: var(--s); height: var(--s);
+    border-radius: calc(var(--s) * .2);
+    display: inline-flex; align-items: center; justify-content: center;
+    padding-right: .04em; /* bù quang học do dấu + lệch phải */
+  }
+  .aclab-icon .ic-plus { margin-left: .02em; }
 </style>
