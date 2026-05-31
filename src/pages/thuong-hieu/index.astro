@@ -1,0 +1,176 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+// Trang XEM THỬ bộ nhận diện — 3 phương án logo "A+" để chọn.
+// Sau khi chốt, trang này sẽ thành Cẩm nang Thương hiệu chính thức.
+---
+
+<BaseLayout title="Nhận diện thương hiệu" description="Bộ nhận diện thương hiệu AcLab+ — logo, màu sắc, typography.">
+  <section class="page-hero">
+    <div class="container-narrow">
+      <p class="kicker">Brand · Bản nháp để chọn</p>
+      <h1>Nhận diện thương hiệu AcLab+</h1>
+      <p class="lead">Ba phương án logo "A+" dưới đây dựa trên cùng một ý tưởng (chữ A + dấu cộng).
+        Hãy xem trên cả nền sáng và nền tối, rồi chọn phương án bạn thích — mình sẽ hoàn thiện thành bộ đầy đủ.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+
+      <!-- ============ PHƯƠNG ÁN 1 — BADGE ============ -->
+      <div class="concept">
+        <h2>Phương án 1 — “Badge” <span class="muted">(giống hiện tại, làm chuẩn lại)</span></h2>
+        <p class="desc">Khối vuông bo góc màu navy, chữ A trắng, dấu + vàng ở góc trên. Đậm, hiện đại, dễ nhận diện ở kích cỡ nhỏ (favicon, avatar).</p>
+        <div class="swatch-row">
+          <div class="stage stage--light">
+            <svg viewBox="0 0 120 120" width="92" height="92" role="img" aria-label="AcLab+ badge">
+              <rect x="6" y="6" width="108" height="108" rx="26" fill="#0F2747"/>
+              <path d="M38 90 L60 32 L82 90" fill="none" stroke="#fff" stroke-width="12" stroke-linejoin="round" stroke-linecap="round"/>
+              <path d="M48 70 H72" stroke="#fff" stroke-width="11" stroke-linecap="round"/>
+              <path d="M93 26 V46 M83 36 H103" stroke="#FFD47A" stroke-width="8" stroke-linecap="round"/>
+            </svg>
+            <!-- lockup ngang -->
+            <div class="lockup">
+              <svg viewBox="0 0 120 120" width="46" height="46" aria-hidden="true">
+                <rect x="6" y="6" width="108" height="108" rx="26" fill="#0F2747"/>
+                <path d="M38 90 L60 32 L82 90" fill="none" stroke="#fff" stroke-width="12" stroke-linejoin="round" stroke-linecap="round"/>
+                <path d="M48 70 H72" stroke="#fff" stroke-width="11" stroke-linecap="round"/>
+                <path d="M93 26 V46 M83 36 H103" stroke="#FFD47A" stroke-width="8" stroke-linecap="round"/>
+              </svg>
+              <span class="word">AcLab<span class="plus-gold">+</span><small>Academic Laboratory</small></span>
+            </div>
+          </div>
+          <div class="stage stage--dark">
+            <svg viewBox="0 0 120 120" width="92" height="92" aria-hidden="true">
+              <rect x="6" y="6" width="108" height="108" rx="26" fill="#fff"/>
+              <path d="M38 90 L60 32 L82 90" fill="none" stroke="#0F2747" stroke-width="12" stroke-linejoin="round" stroke-linecap="round"/>
+              <path d="M48 70 H72" stroke="#0F2747" stroke-width="11" stroke-linecap="round"/>
+              <path d="M93 26 V46 M83 36 H103" stroke="#8A2B2B" stroke-width="8" stroke-linecap="round"/>
+            </svg>
+            <div class="lockup lockup--ondark">
+              <svg viewBox="0 0 120 120" width="46" height="46" aria-hidden="true">
+                <rect x="6" y="6" width="108" height="108" rx="26" fill="#fff"/>
+                <path d="M38 90 L60 32 L82 90" fill="none" stroke="#0F2747" stroke-width="12" stroke-linejoin="round" stroke-linecap="round"/>
+                <path d="M48 70 H72" stroke="#0F2747" stroke-width="11" stroke-linecap="round"/>
+                <path d="M93 26 V46 M83 36 H103" stroke="#FFD47A" stroke-width="8" stroke-linecap="round"/>
+              </svg>
+              <span class="word word--light">AcLab<span class="plus-gold">+</span><small>Academic Laboratory</small></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ PHƯƠNG ÁN 2 — OPEN / ACADEMIC ============ -->
+      <div class="concept">
+        <h2>Phương án 2 — “Open” <span class="muted">(thanh thoát, học thuật)</span></h2>
+        <p class="desc">Không khối nền. Chữ A nét navy đứng cạnh dấu + marsala. Nhẹ nhàng, trang trọng, hợp văn phong nghiên cứu.</p>
+        <div class="swatch-row">
+          <div class="stage stage--light">
+            <svg viewBox="0 0 150 110" width="150" height="110" role="img" aria-label="AcLab+ open mark">
+              <path d="M30 92 L57 24 L84 92" fill="none" stroke="#0F2747" stroke-width="11" stroke-linejoin="round" stroke-linecap="round"/>
+              <path d="M42 70 H72" stroke="#0F2747" stroke-width="10" stroke-linecap="round"/>
+              <path d="M115 40 V72 M99 56 H131" stroke="#8A2B2B" stroke-width="11" stroke-linecap="round"/>
+            </svg>
+            <div class="lockup">
+              <span class="word word--serif">A<span class="plus-marsala">+</span></span>
+              <span class="word">AcLab<span class="plus-marsala">+</span><small>Academic Laboratory</small></span>
+            </div>
+          </div>
+          <div class="stage stage--dark">
+            <svg viewBox="0 0 150 110" width="150" height="110" aria-hidden="true">
+              <path d="M30 92 L57 24 L84 92" fill="none" stroke="#fff" stroke-width="11" stroke-linejoin="round" stroke-linecap="round"/>
+              <path d="M42 70 H72" stroke="#fff" stroke-width="10" stroke-linecap="round"/>
+              <path d="M115 40 V72 M99 56 H131" stroke="#FFD47A" stroke-width="11" stroke-linecap="round"/>
+            </svg>
+            <div class="lockup lockup--ondark">
+              <span class="word word--serif word--light">A<span class="plus-gold">+</span></span>
+              <span class="word word--light">AcLab<span class="plus-gold">+</span><small>Academic Laboratory</small></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ PHƯƠNG ÁN 3 — MONOGRAM TRÒN ============ -->
+      <div class="concept">
+        <h2>Phương án 3 — “Seal” <span class="muted">(con dấu tròn, uy tín viện nghiên cứu)</span></h2>
+        <p class="desc">Mark tròn kiểu con dấu học thuật, A+ ở giữa. Gợi cảm giác “institution”, hợp khi đóng dấu lên working paper / văn bản chính thức.</p>
+        <div class="swatch-row">
+          <div class="stage stage--light">
+            <svg viewBox="0 0 120 120" width="92" height="92" role="img" aria-label="AcLab+ seal">
+              <circle cx="60" cy="60" r="54" fill="none" stroke="#0F2747" stroke-width="4"/>
+              <circle cx="60" cy="60" r="46" fill="none" stroke="#0F2747" stroke-width="1.5"/>
+              <path d="M40 84 L58 40 L76 84" fill="none" stroke="#0F2747" stroke-width="9" stroke-linejoin="round" stroke-linecap="round"/>
+              <path d="M49 68 H67" stroke="#0F2747" stroke-width="8" stroke-linecap="round"/>
+              <path d="M84 40 V58 M75 49 H93" stroke="#8A2B2B" stroke-width="6.5" stroke-linecap="round"/>
+            </svg>
+            <div class="lockup">
+              <span class="word">AcLab<span class="plus-marsala">+</span><small>Academic Laboratory · since 2026</small></span>
+            </div>
+          </div>
+          <div class="stage stage--dark">
+            <svg viewBox="0 0 120 120" width="92" height="92" aria-hidden="true">
+              <circle cx="60" cy="60" r="54" fill="none" stroke="#fff" stroke-width="4"/>
+              <circle cx="60" cy="60" r="46" fill="none" stroke="#fff" stroke-width="1.5"/>
+              <path d="M40 84 L58 40 L76 84" fill="none" stroke="#fff" stroke-width="9" stroke-linejoin="round" stroke-linecap="round"/>
+              <path d="M49 68 H67" stroke="#fff" stroke-width="8" stroke-linecap="round"/>
+              <path d="M84 40 V58 M75 49 H93" stroke="#FFD47A" stroke-width="6.5" stroke-linecap="round"/>
+            </svg>
+            <div class="lockup lockup--ondark">
+              <span class="word word--light">AcLab<span class="plus-gold">+</span><small>Academic Laboratory · since 2026</small></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ BẢNG MÀU + TYPOGRAPHY ============ -->
+      <div class="concept">
+        <h2>Bảng màu thương hiệu</h2>
+        <div class="palette">
+          <div class="color"><span style="background:#0F2747"></span><b>Navy</b><code>#0F2747</code></div>
+          <div class="color"><span style="background:#8A2B2B"></span><b>Marsala</b><code>#8A2B2B</code></div>
+          <div class="color"><span style="background:#FFD47A"></span><b>Gold</b><code>#FFD47A</code></div>
+          <div class="color"><span style="background:#FBF8F1;border:1px solid #ddd"></span><b>Cream</b><code>#FBF8F1</code></div>
+        </div>
+        <h2 style="margin-top:2.5rem;">Typography</h2>
+        <p class="type-serif">Lora — chữ tiêu đề &amp; nội dung (serif học thuật)</p>
+        <p class="type-sans">Be Vietnam Pro — chữ giao diện &amp; nhãn (sans-serif)</p>
+      </div>
+
+    </div>
+  </section>
+
+  <style>
+    .page-hero { padding: 4rem 0 2rem; background: linear-gradient(180deg, var(--bg) 0%, var(--surface-2) 100%); border-bottom: 1px solid var(--border); }
+    .page-hero h1 { margin: .6rem 0 1rem; }
+    .concept { padding: 2.4rem 0; border-bottom: 1px solid var(--border); }
+    .concept h2 { margin: 0 0 .4rem; }
+    .concept .desc { color: var(--muted); max-width: 60ch; margin: 0 0 1.4rem; }
+    .swatch-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    @media (max-width: 700px) { .swatch-row { grid-template-columns: 1fr; } }
+    .stage {
+      border-radius: var(--radius-lg); padding: 2rem;
+      display: flex; flex-direction: column; gap: 1.6rem; align-items: flex-start;
+    }
+    .stage--light { background: #fff; border: 1px solid var(--border); }
+    .stage--dark { background: #0F2747; }
+    .lockup { display: flex; align-items: center; gap: .8rem; }
+    .word {
+      display: flex; flex-direction: column; line-height: 1.05;
+      font-family: var(--font-sans); font-weight: 700; font-size: 1.5rem; color: #0F2747;
+    }
+    .word small { font-weight: 500; font-size: .6rem; letter-spacing: .14em; text-transform: uppercase; color: #7a8499; margin-top: 3px; }
+    .word--light { color: #fff; }
+    .word--light small { color: #aeb6c8; }
+    .word--serif { font-family: var(--font-serif); font-size: 2rem; }
+    .plus-gold { color: #FFD47A; }
+    .plus-marsala { color: #8A2B2B; }
+    .word--light .plus-marsala { color: #FFD47A; }
+
+    .palette { display: flex; flex-wrap: wrap; gap: 1.2rem; }
+    .color { display: flex; flex-direction: column; gap: .3rem; font-family: var(--font-sans); font-size: .85rem; }
+    .color span { width: 90px; height: 64px; border-radius: 10px; display: block; }
+    .color code { color: var(--muted); }
+    .type-serif { font-family: var(--font-serif); font-size: 1.5rem; margin: .4rem 0; }
+    .type-sans { font-family: var(--font-sans); font-size: 1.5rem; font-weight: 600; margin: .4rem 0; }
+  </style>
+</BaseLayout>
