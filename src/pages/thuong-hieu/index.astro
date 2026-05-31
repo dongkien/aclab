@@ -1,217 +1,249 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-// Trang XEM THỬ bộ nhận diện — 3 phương án logo "A+" để chọn.
-// Sau khi chốt, trang này sẽ thành Cẩm nang Thương hiệu chính thức.
+import Logo from '../../components/Logo.astro';
+// Cẩm nang thương hiệu AcLab+ — logo (font LaTeX Computer Modern), sub-logo International, ấn phẩm.
 ---
 
-<BaseLayout title="Nhận diện thương hiệu" description="Bộ nhận diện thương hiệu AcLab+ — logo, màu sắc, typography.">
+<BaseLayout title="Nhận diện thương hiệu" description="Bộ nhận diện thương hiệu AcLab+ — logo, sub-logo International, ấn phẩm văn phòng.">
   <Fragment slot="head">
-    <!-- Font LaTeX (Computer Modern) + các font monospace/serif để so sánh wordmark -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Serif:wght@600&family=JetBrains+Mono:wght@600&family=Space+Mono:wght@700&family=EB+Garamond:wght@600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=JetBrains+Mono:wght@600&family=Space+Mono:wght@700&display=swap" rel="stylesheet" />
   </Fragment>
 
   <section class="page-hero">
     <div class="container-narrow">
-      <p class="kicker">Brand · Bản nháp để chọn</p>
+      <p class="kicker">Brand Identity</p>
       <h1>Nhận diện thương hiệu AcLab+</h1>
-      <p class="lead">Ba phương án logo "A+" dưới đây dựa trên cùng một ý tưởng (chữ A + dấu cộng).
-        Hãy xem trên cả nền sáng và nền tối, rồi chọn phương án bạn thích — mình sẽ hoàn thiện thành bộ đầy đủ.</p>
+      <p class="lead">Logo dùng chữ <strong>“A+”</strong> với font LaTeX <strong>Computer Modern</strong> —
+        dấu <strong>+</strong> luôn đi kèm chữ A hoặc AcLab+. Dưới đây là logo chính, sub-logo
+        <em>International</em>, bảng màu, typography và bộ ấn phẩm văn phòng.</p>
     </div>
   </section>
 
   <section class="section">
     <div class="container">
 
-      <!-- ============ PHÔNG CHỮ CHO WORDMARK "AcLab+" ============ -->
-      <div class="concept">
-        <h2>Phông chữ cho chữ “AcLab+”</h2>
-        <p class="desc">Cùng chữ “AcLab+” render bằng các font khác nhau. Font quyết định "chất" của thương hiệu:
-          LaTeX = học thuật cổ điển, monospace = lab/code. Chọn font bạn thích để mình áp vào wordmark.</p>
-        <div class="fonts">
-          <div class="fitem"><span class="wm" style="font-family:'Computer Modern Serif',serif">AcLab<i>+</i></span><label>Computer Modern <b>— đúng font LaTeX (serif)</b></label></div>
-          <div class="fitem hi"><span class="wm" style="font-family:'Computer Modern Typewriter',monospace">AcLab<i>+</i></span><label>CM Typewriter <b>— font máy chữ LaTeX (vừa LaTeX vừa terminal) ⭐</b></label></div>
-          <div class="fitem"><span class="wm" style="font-family:'JetBrains Mono',monospace">AcLab<i>+</i></span><label>JetBrains Mono — terminal/code hiện đại</label></div>
-          <div class="fitem"><span class="wm" style="font-family:'IBM Plex Mono',monospace">AcLab<i>+</i></span><label>IBM Plex Mono — monospace tinh tế (hệ IBM Plex)</label></div>
-          <div class="fitem"><span class="wm" style="font-family:'Space Mono',monospace">AcLab<i>+</i></span><label>Space Mono — monospace retro, cá tính</label></div>
-          <div class="fitem"><span class="wm" style="font-family:'IBM Plex Serif',serif">AcLab<i>+</i></span><label>IBM Plex Serif — serif học thuật, cặp với Plex Mono</label></div>
-          <div class="fitem"><span class="wm" style="font-family:'EB Garamond',serif">AcLab<i>+</i></span><label>EB Garamond — serif cổ điển tạp chí</label></div>
-          <div class="fitem"><span class="wm" style="font-family:var(--font-sans)">AcLab<i>+</i></span><label>Be Vietnam Pro — hiện tại (sans)</label></div>
+      <!-- ========== 1. LOGO CHÍNH ========== -->
+      <div class="block">
+        <h2>1 · Logo chính</h2>
+        <div class="grid2">
+          <div class="stage light"><Logo size={54} /></div>
+          <div class="stage dark"><Logo size={54} theme="dark" /></div>
+        </div>
+        <h3>Biến thể</h3>
+        <div class="grid4">
+          <div class="stage light col"><Logo size={64} iconOnly={true} /><span class="cap">Icon (badge)</span></div>
+          <div class="stage dark col"><Logo size={64} iconOnly={true} theme="dark" /><span class="cap dark">Icon nền tối</span></div>
+          <div class="stage light col"><Logo size={56} variant="open" tagline={false} /><span class="cap">Mark “open” + wordmark</span></div>
+          <div class="stage light col"><Logo size={40} tagline={false} /><span class="cap">Ngang gọn (không tagline)</span></div>
         </div>
       </div>
 
-      <!-- ============ PHƯƠNG ÁN 1 — BADGE ============ -->
-      <div class="concept">
-        <h2>Phương án 1 — “Badge” <span class="muted">(giống hiện tại, làm chuẩn lại)</span></h2>
-        <p class="desc">Khối vuông bo góc màu navy, chữ A trắng, dấu + vàng ở góc trên. Đậm, hiện đại, dễ nhận diện ở kích cỡ nhỏ (favicon, avatar).</p>
-        <div class="swatch-row">
-          <div class="stage stage--light">
-            <svg viewBox="0 0 120 120" width="92" height="92" role="img" aria-label="AcLab+ badge">
-              <rect x="6" y="6" width="108" height="108" rx="26" fill="#0F2747"/>
-              <path d="M38 90 L60 32 L82 90" fill="none" stroke="#fff" stroke-width="12" stroke-linejoin="round" stroke-linecap="round"/>
-              <path d="M48 70 H72" stroke="#fff" stroke-width="11" stroke-linecap="round"/>
-              <path d="M93 26 V46 M83 36 H103" stroke="#FFD47A" stroke-width="8" stroke-linecap="round"/>
-            </svg>
-            <!-- lockup ngang -->
-            <div class="lockup">
-              <svg viewBox="0 0 120 120" width="46" height="46" aria-hidden="true">
-                <rect x="6" y="6" width="108" height="108" rx="26" fill="#0F2747"/>
-                <path d="M38 90 L60 32 L82 90" fill="none" stroke="#fff" stroke-width="12" stroke-linejoin="round" stroke-linecap="round"/>
-                <path d="M48 70 H72" stroke="#fff" stroke-width="11" stroke-linecap="round"/>
-                <path d="M93 26 V46 M83 36 H103" stroke="#FFD47A" stroke-width="8" stroke-linecap="round"/>
-              </svg>
-              <span class="word">AcLab<span class="plus-gold">+</span><small>Academic Laboratory</small></span>
-            </div>
-          </div>
-          <div class="stage stage--dark">
-            <svg viewBox="0 0 120 120" width="92" height="92" aria-hidden="true">
-              <rect x="6" y="6" width="108" height="108" rx="26" fill="#fff"/>
-              <path d="M38 90 L60 32 L82 90" fill="none" stroke="#0F2747" stroke-width="12" stroke-linejoin="round" stroke-linecap="round"/>
-              <path d="M48 70 H72" stroke="#0F2747" stroke-width="11" stroke-linecap="round"/>
-              <path d="M93 26 V46 M83 36 H103" stroke="#8A2B2B" stroke-width="8" stroke-linecap="round"/>
-            </svg>
-            <div class="lockup lockup--ondark">
-              <svg viewBox="0 0 120 120" width="46" height="46" aria-hidden="true">
-                <rect x="6" y="6" width="108" height="108" rx="26" fill="#fff"/>
-                <path d="M38 90 L60 32 L82 90" fill="none" stroke="#0F2747" stroke-width="12" stroke-linejoin="round" stroke-linecap="round"/>
-                <path d="M48 70 H72" stroke="#0F2747" stroke-width="11" stroke-linecap="round"/>
-                <path d="M93 26 V46 M83 36 H103" stroke="#FFD47A" stroke-width="8" stroke-linecap="round"/>
-              </svg>
-              <span class="word word--light">AcLab<span class="plus-gold">+</span><small>Academic Laboratory</small></span>
-            </div>
-          </div>
+      <!-- ========== 2. SUB-LOGO INTERNATIONAL ========== -->
+      <div class="block">
+        <h2>2 · Sub-logo — AcLab+ International</h2>
+        <p class="desc">Phiên bản quốc tế: thêm chữ <em>International</em> (in nghiêng, font LaTeX) sau wordmark.
+          Dùng cho hoạt động/ấn phẩm tiếng Anh, đối ngoại quốc tế.</p>
+        <div class="grid2">
+          <div class="stage light"><Logo size={50} intl={true} /></div>
+          <div class="stage dark"><Logo size={50} intl={true} theme="dark" /></div>
         </div>
       </div>
 
-      <!-- ============ PHƯƠNG ÁN 2 — OPEN / ACADEMIC ============ -->
-      <div class="concept">
-        <h2>Phương án 2 — “Open” <span class="muted">(thanh thoát, học thuật)</span></h2>
-        <p class="desc">Không khối nền. Chữ A nét navy đứng cạnh dấu + marsala. Nhẹ nhàng, trang trọng, hợp văn phong nghiên cứu.</p>
-        <div class="swatch-row">
-          <div class="stage stage--light">
-            <svg viewBox="0 0 150 110" width="150" height="110" role="img" aria-label="AcLab+ open mark">
-              <path d="M30 92 L57 24 L84 92" fill="none" stroke="#0F2747" stroke-width="11" stroke-linejoin="round" stroke-linecap="round"/>
-              <path d="M42 70 H72" stroke="#0F2747" stroke-width="10" stroke-linecap="round"/>
-              <path d="M115 40 V72 M99 56 H131" stroke="#8A2B2B" stroke-width="11" stroke-linecap="round"/>
-            </svg>
-            <div class="lockup">
-              <span class="word word--serif">A<span class="plus-marsala">+</span></span>
-              <span class="word">AcLab<span class="plus-marsala">+</span><small>Academic Laboratory</small></span>
-            </div>
-          </div>
-          <div class="stage stage--dark">
-            <svg viewBox="0 0 150 110" width="150" height="110" aria-hidden="true">
-              <path d="M30 92 L57 24 L84 92" fill="none" stroke="#fff" stroke-width="11" stroke-linejoin="round" stroke-linecap="round"/>
-              <path d="M42 70 H72" stroke="#fff" stroke-width="10" stroke-linecap="round"/>
-              <path d="M115 40 V72 M99 56 H131" stroke="#FFD47A" stroke-width="11" stroke-linecap="round"/>
-            </svg>
-            <div class="lockup lockup--ondark">
-              <span class="word word--serif word--light">A<span class="plus-gold">+</span></span>
-              <span class="word word--light">AcLab<span class="plus-gold">+</span><small>Academic Laboratory</small></span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ============ PHƯƠNG ÁN 3 — MONOGRAM TRÒN ============ -->
-      <div class="concept">
-        <h2>Phương án 3 — “Seal” <span class="muted">(con dấu tròn, uy tín viện nghiên cứu)</span></h2>
-        <p class="desc">Mark tròn kiểu con dấu học thuật, A+ ở giữa. Gợi cảm giác “institution”, hợp khi đóng dấu lên working paper / văn bản chính thức.</p>
-        <div class="swatch-row">
-          <div class="stage stage--light">
-            <svg viewBox="0 0 120 120" width="92" height="92" role="img" aria-label="AcLab+ seal">
-              <circle cx="60" cy="60" r="54" fill="none" stroke="#0F2747" stroke-width="4"/>
-              <circle cx="60" cy="60" r="46" fill="none" stroke="#0F2747" stroke-width="1.5"/>
-              <path d="M40 84 L58 40 L76 84" fill="none" stroke="#0F2747" stroke-width="9" stroke-linejoin="round" stroke-linecap="round"/>
-              <path d="M49 68 H67" stroke="#0F2747" stroke-width="8" stroke-linecap="round"/>
-              <path d="M84 40 V58 M75 49 H93" stroke="#8A2B2B" stroke-width="6.5" stroke-linecap="round"/>
-            </svg>
-            <div class="lockup">
-              <span class="word">AcLab<span class="plus-marsala">+</span><small>Academic Laboratory · since 2026</small></span>
-            </div>
-          </div>
-          <div class="stage stage--dark">
-            <svg viewBox="0 0 120 120" width="92" height="92" aria-hidden="true">
-              <circle cx="60" cy="60" r="54" fill="none" stroke="#fff" stroke-width="4"/>
-              <circle cx="60" cy="60" r="46" fill="none" stroke="#fff" stroke-width="1.5"/>
-              <path d="M40 84 L58 40 L76 84" fill="none" stroke="#fff" stroke-width="9" stroke-linejoin="round" stroke-linecap="round"/>
-              <path d="M49 68 H67" stroke="#fff" stroke-width="8" stroke-linecap="round"/>
-              <path d="M84 40 V58 M75 49 H93" stroke="#FFD47A" stroke-width="6.5" stroke-linecap="round"/>
-            </svg>
-            <div class="lockup lockup--ondark">
-              <span class="word word--light">AcLab<span class="plus-gold">+</span><small>Academic Laboratory · since 2026</small></span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ============ BẢNG MÀU + TYPOGRAPHY ============ -->
-      <div class="concept">
-        <h2>Bảng màu thương hiệu</h2>
+      <!-- ========== 3. BẢNG MÀU ========== -->
+      <div class="block">
+        <h2>3 · Bảng màu</h2>
         <div class="palette">
           <div class="color"><span style="background:#0F2747"></span><b>Navy</b><code>#0F2747</code></div>
           <div class="color"><span style="background:#8A2B2B"></span><b>Marsala</b><code>#8A2B2B</code></div>
           <div class="color"><span style="background:#FFD47A"></span><b>Gold</b><code>#FFD47A</code></div>
           <div class="color"><span style="background:#FBF8F1;border:1px solid #ddd"></span><b>Cream</b><code>#FBF8F1</code></div>
         </div>
-        <h2 style="margin-top:2.5rem;">Typography</h2>
-        <p class="type-serif">Lora — chữ tiêu đề &amp; nội dung (serif học thuật)</p>
-        <p class="type-sans">Be Vietnam Pro — chữ giao diện &amp; nhãn (sans-serif)</p>
       </div>
 
+      <!-- ========== 4. TYPOGRAPHY ========== -->
+      <div class="block">
+        <h2>4 · Typography</h2>
+        <ul class="typ">
+          <li><span class="cm">Computer Modern</span> — logo & wordmark (font LaTeX, chất học thuật)</li>
+          <li><span style="font-family:var(--font-serif);font-size:1.5rem">Lora</span> — tiêu đề & nội dung web</li>
+          <li><span style="font-family:var(--font-sans);font-size:1.4rem;font-weight:600">Be Vietnam Pro</span> — giao diện, nhãn, tagline</li>
+        </ul>
+      </div>
+
+      <!-- ========== 5. ẤN PHẨM ========== -->
+      <div class="block">
+        <h2>5 · Ấn phẩm văn phòng</h2>
+        <p class="desc">Các mẫu dưới đây dùng đúng tỉ lệ in thật (mm). Tất cả là vector — xuất PDF in được.</p>
+
+        <div class="stationery">
+
+          <!-- Danh thiếp (85×55mm) -->
+          <figure>
+            <div class="card biz biz-front">
+              <Logo size={30} theme="dark" tagline={false} />
+              <div class="biz-tag">Academic Laboratory<br/>Kinh tế · Kinh doanh · Quản lý</div>
+            </div>
+            <div class="card biz biz-back">
+              <div class="biz-name">TS. Nguyễn Văn An</div>
+              <div class="biz-role">Trưởng nhóm nghiên cứu</div>
+              <div class="biz-lines">
+                <span>✉ an.nguyen@aclab.plus</span>
+                <span>🌐 aclab.plus</span>
+                <span>📍 Hà Nội, Việt Nam</span>
+              </div>
+              <div class="biz-mini"><Logo size={22} iconOnly={true} /></div>
+            </div>
+            <figcaption>Danh thiếp — 85 × 55 mm (mặt trước / mặt sau)</figcaption>
+          </figure>
+
+          <!-- Letterhead A4 -->
+          <figure>
+            <div class="card a4">
+              <div class="a4-head">
+                <Logo size={34} />
+                <span class="a4-rule"></span>
+              </div>
+              <div class="a4-body">
+                <span></span><span></span><span style="width:80%"></span><span></span>
+                <span style="width:90%"></span><span style="width:60%"></span>
+              </div>
+              <div class="a4-foot">aclab.plus · aclabecon@gmail.com · Hà Nội, Việt Nam</div>
+            </div>
+            <figcaption>Letterhead — A4 (210 × 297 mm)</figcaption>
+          </figure>
+
+          <!-- Phong bì DL -->
+          <figure>
+            <div class="card env">
+              <div class="env-return"><Logo size={22} tagline={false} /><small>aclab.plus · Hà Nội, Việt Nam</small></div>
+              <div class="env-stamp">Tem</div>
+              <div class="env-to"><i>Kính gửi:</i><span></span><span style="width:70%"></span><span style="width:55%"></span></div>
+            </div>
+            <figcaption>Phong bì — DL (220 × 110 mm)</figcaption>
+          </figure>
+
+          <!-- Giấy mời -->
+          <figure>
+            <div class="card invite">
+              <Logo size={30} tagline={false} />
+              <span class="inv-rule"></span>
+              <div class="inv-title">THƯ MỜI</div>
+              <div class="inv-sub">Seminar học thuật AcLab+</div>
+              <div class="inv-lines"><span style="width:70%"></span><span style="width:85%"></span><span style="width:55%"></span></div>
+              <div class="inv-foot">Trân trọng kính mời</div>
+            </div>
+            <figcaption>Giấy mời — A5</figcaption>
+          </figure>
+
+          <!-- Bìa Working Paper -->
+          <figure>
+            <div class="card wp">
+              <div class="wp-top"><Logo size={26} tagline={false} /><span class="wp-series">Working Paper Series</span></div>
+              <div class="wp-no">WP-AC-2026-01</div>
+              <div class="wp-title">Năng suất nhân tố tổng hợp Việt Nam, 2010–2024</div>
+              <div class="wp-auth">Trần Thị Bình · Lê Quang Cường</div>
+              <div class="wp-foot"><span class="wp-rule"></span>DOI: 10.5281/zenodo.xxxxxxx</div>
+            </div>
+            <figcaption>Bìa Working Paper — A4</figcaption>
+          </figure>
+
+          <!-- Avatar mạng xã hội -->
+          <figure>
+            <div class="card avatar"><Logo size={92} iconOnly={true} theme="dark" /></div>
+            <figcaption>Avatar / app icon (vuông)</figcaption>
+          </figure>
+
+        </div>
+      </div>
+
+      <p class="note">Đây là bản dựng để duyệt. Sau khi bạn chốt, mình sẽ xuất file logo SVG/PNG (đã outline font),
+        favicon mới, và file in PDF cho từng ấn phẩm.</p>
     </div>
   </section>
 
   <style>
     .page-hero { padding: 4rem 0 2rem; background: linear-gradient(180deg, var(--bg) 0%, var(--surface-2) 100%); border-bottom: 1px solid var(--border); }
     .page-hero h1 { margin: .6rem 0 1rem; }
-    .concept { padding: 2.4rem 0; border-bottom: 1px solid var(--border); }
-    .concept h2 { margin: 0 0 .4rem; }
-    .concept .desc { color: var(--muted); max-width: 60ch; margin: 0 0 1.4rem; }
-    .swatch-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-    @media (max-width: 700px) { .swatch-row { grid-template-columns: 1fr; } }
-    .stage {
-      border-radius: var(--radius-lg); padding: 2rem;
-      display: flex; flex-direction: column; gap: 1.6rem; align-items: flex-start;
-    }
-    .stage--light { background: #fff; border: 1px solid var(--border); }
-    .stage--dark { background: #0F2747; }
-    .lockup { display: flex; align-items: center; gap: .8rem; }
-    .word {
-      display: flex; flex-direction: column; line-height: 1.05;
-      font-family: var(--font-sans); font-weight: 700; font-size: 1.5rem; color: #0F2747;
-    }
-    .word small { font-weight: 500; font-size: .6rem; letter-spacing: .14em; text-transform: uppercase; color: #7a8499; margin-top: 3px; }
-    .word--light { color: #fff; }
-    .word--light small { color: #aeb6c8; }
-    .word--serif { font-family: var(--font-serif); font-size: 2rem; }
-    .plus-gold { color: #FFD47A; }
-    .plus-marsala { color: #8A2B2B; }
-    .word--light .plus-marsala { color: #FFD47A; }
+    .block { padding: 2.4rem 0; border-bottom: 1px solid var(--border); }
+    .block h2 { margin: 0 0 1rem; }
+    .block h3 { margin: 1.8rem 0 .8rem; font-size: 1.05rem; color: var(--muted); }
+    .desc { color: var(--muted); max-width: 60ch; margin: -.4rem 0 1.4rem; }
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+    .grid4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 1rem; }
+    @media (max-width: 760px){ .grid2,.grid4{ grid-template-columns: 1fr 1fr; } }
+    .stage { border-radius: var(--radius-lg); padding: 2rem; display: flex; align-items: center; justify-content: center; min-height: 120px; }
+    .stage.col { flex-direction: column; gap: .8rem; }
+    .stage.light { background: #fff; border: 1px solid var(--border); }
+    .stage.dark { background: #0F2747; }
+    .cap { font-family: var(--font-sans); font-size: .78rem; color: var(--muted); text-align:center; }
+    .cap.dark { color: #aeb6c8; }
 
     .palette { display: flex; flex-wrap: wrap; gap: 1.2rem; }
     .color { display: flex; flex-direction: column; gap: .3rem; font-family: var(--font-sans); font-size: .85rem; }
-    .color span { width: 90px; height: 64px; border-radius: 10px; display: block; }
+    .color span { width: 88px; height: 60px; border-radius: 10px; display: block; }
     .color code { color: var(--muted); }
-    .type-serif { font-family: var(--font-serif); font-size: 1.5rem; margin: .4rem 0; }
-    .type-sans { font-family: var(--font-sans); font-size: 1.5rem; font-weight: 600; margin: .4rem 0; }
+    .typ { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 1rem; font-family: var(--font-sans); color: var(--muted); }
+    .cm { font-family: 'Computer Modern Serif', serif; font-size: 1.7rem; color: var(--text); }
 
-    .fonts { display: flex; flex-direction: column; gap: .2rem; }
-    .fitem {
-      display: flex; align-items: baseline; gap: 1.4rem; flex-wrap: wrap;
-      padding: 1rem 1.1rem; border-radius: var(--radius);
-      border-bottom: 1px solid var(--border-soft);
-    }
-    .fitem.hi { background: var(--surface-2); border: 1px solid var(--accent-2); border-radius: var(--radius-lg); }
-    .fitem .wm {
-      font-size: 2.6rem; font-weight: 600; color: var(--accent);
-      min-width: 5.5ch; line-height: 1.1;
-    }
-    .fitem .wm i { color: var(--accent-2); font-style: normal; }
-    .fitem label { font-family: var(--font-sans); font-size: .9rem; color: var(--muted); }
-    .fitem label b { color: var(--text); font-weight: 600; }
-    @media (max-width: 600px) { .fitem .wm { font-size: 2.1rem; } }
+    /* ---------- Ấn phẩm ---------- */
+    .stationery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+    @media (max-width: 760px){ .stationery { grid-template-columns: 1fr; } }
+    figure { margin: 0; }
+    figcaption { font-family: var(--font-sans); font-size: .82rem; color: var(--muted); margin-top: .7rem; }
+    .card { box-shadow: 0 10px 30px rgba(15,39,71,.12); border-radius: 6px; overflow: hidden; }
+
+    /* Danh thiếp 85x55 */
+    .biz { width: 100%; max-width: 360px; aspect-ratio: 85/55; padding: 20px; box-sizing: border-box; display: flex; flex-direction: column; }
+    .biz-front { background: #0F2747; justify-content: space-between; margin-bottom: 14px; }
+    .biz-tag { font-family: var(--font-sans); font-size: .62rem; letter-spacing: .12em; text-transform: uppercase; color: #aeb6c8; line-height: 1.6; }
+    .biz-back { background: #FBF8F1; position: relative; justify-content: center; }
+    .biz-name { font-family: 'Computer Modern Serif', serif; font-size: 1.15rem; color: #0F2747; font-weight: 600; }
+    .biz-role { font-family: var(--font-sans); font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; color: #8A2B2B; margin: 2px 0 12px; }
+    .biz-lines { display: flex; flex-direction: column; gap: 4px; font-family: var(--font-sans); font-size: .72rem; color: #41506b; }
+    .biz-mini { position: absolute; right: 18px; bottom: 16px; opacity: .85; }
+
+    /* A4 letterhead */
+    .a4 { width: 100%; max-width: 300px; aspect-ratio: 210/297; background: #fff; padding: 22px; box-sizing: border-box; display: flex; flex-direction: column; }
+    .a4-head { display: flex; flex-direction: column; gap: 10px; }
+    .a4-rule { height: 3px; background: linear-gradient(90deg,#0F2747 60%,#FFD47A 60%); border-radius: 2px; }
+    .a4-body { flex: 1; display: flex; flex-direction: column; gap: 9px; padding-top: 26px; }
+    .a4-body span { height: 7px; width: 100%; background: #eef0f4; border-radius: 3px; }
+    .a4-foot { font-family: var(--font-sans); font-size: .56rem; letter-spacing: .06em; color: #7a8499; text-align: center; border-top: 1px solid #eee; padding-top: 8px; }
+
+    /* Phong bì DL */
+    .env { width: 100%; max-width: 440px; aspect-ratio: 220/110; background: #FBF8F1; padding: 18px; box-sizing: border-box; position: relative; }
+    .env-return { display: flex; flex-direction: column; gap: 3px; }
+    .env-return small { font-family: var(--font-sans); font-size: .58rem; color: #7a8499; }
+    .env-stamp { position: absolute; top: 16px; right: 16px; width: 46px; height: 56px; border: 1px dashed #b9b2a3; border-radius: 3px; display: flex; align-items: center; justify-content: center; font-family: var(--font-sans); font-size: .55rem; color: #b9b2a3; }
+    .env-to { position: absolute; left: 38%; bottom: 16px; display: flex; flex-direction: column; gap: 6px; width: 50%; }
+    .env-to i { font-family: var(--font-sans); font-size: .62rem; color: #41506b; }
+    .env-to span { height: 6px; width: 100%; background: #e6e2d6; border-radius: 3px; }
+
+    /* Giấy mời A5 */
+    .invite { width: 100%; max-width: 300px; aspect-ratio: 148/210; background: #fff; padding: 26px 22px; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; text-align: center; }
+    .inv-rule { width: 40px; height: 2px; background: #FFD47A; margin: 16px 0; }
+    .inv-title { font-family: 'Computer Modern Serif', serif; font-size: 1.5rem; letter-spacing: .14em; color: #0F2747; }
+    .inv-sub { font-family: var(--font-sans); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: #8A2B2B; margin-top: 6px; }
+    .inv-lines { display: flex; flex-direction: column; gap: 7px; margin: 22px 0; width: 100%; align-items: center; }
+    .inv-lines span { height: 6px; background: #eef0f4; border-radius: 3px; }
+    .inv-foot { margin-top: auto; font-family: 'Computer Modern Serif', serif; font-style: italic; font-size: .9rem; color: #41506b; }
+
+    /* Bìa working paper */
+    .wp { width: 100%; max-width: 300px; aspect-ratio: 210/297; background: #fff; padding: 24px; box-sizing: border-box; display: flex; flex-direction: column; }
+    .wp-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding-bottom: 14px; border-bottom: 2px solid #0F2747; }
+    .wp-series { font-family: var(--font-sans); font-size: .56rem; letter-spacing: .1em; text-transform: uppercase; color: #8A2B2B; }
+    .wp-no { font-family: var(--font-sans); font-size: .64rem; letter-spacing: .08em; color: #7a8499; margin-top: 30px; }
+    .wp-title { font-family: 'Computer Modern Serif', serif; font-size: 1.2rem; line-height: 1.3; color: #0F2747; margin-top: 10px; }
+    .wp-auth { font-family: 'Computer Modern Serif', serif; font-style: italic; font-size: .82rem; color: #41506b; margin-top: 12px; }
+    .wp-foot { margin-top: auto; font-family: var(--font-sans); font-size: .58rem; color: #7a8499; }
+    .wp-rule { display: block; height: 2px; width: 36px; background: #FFD47A; margin-bottom: 8px; }
+
+    /* Avatar */
+    .avatar { width: 160px; height: 160px; background: #0F2747; display: flex; align-items: center; justify-content: center; border-radius: 24px; }
+
+    .note { font-family: var(--font-sans); font-size: .85rem; color: var(--muted); margin-top: 2rem; font-style: italic; }
   </style>
 </BaseLayout>

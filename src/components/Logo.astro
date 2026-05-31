@@ -1,0 +1,80 @@
+---
+// Logo AcLab+ — dùng chung cho web + mọi ấn phẩm.
+// Chữ "A+" và "AcLab+" dùng font LaTeX (Computer Modern). Dấu + LUÔN đi kèm A/AcLab+.
+// Yêu cầu: trang dùng component này phải nạp font 'Computer Modern Serif'
+// (link trong <head>: https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css)
+interface Props {
+  theme?: 'light' | 'dark';     // light = logo tối trên nền sáng; dark = logo sáng trên nền tối
+  size?: number;                // chiều cao mark (px)
+  tagline?: boolean;            // hiện "Academic Laboratory"
+  intl?: boolean;               // sub-logo: AcLab+ International
+  iconOnly?: boolean;           // chỉ hiện mark vuông
+  variant?: 'badge' | 'open';   // badge = khối vuông; open = chữ A+ trần
+}
+const {
+  theme = 'light', size = 44, tagline = true, intl = false, iconOnly = false, variant = 'badge',
+} = Astro.props;
+
+const tile   = theme === 'dark' ? '#FFFFFF' : '#0F2747';
+const letter = theme === 'dark' ? '#0F2747' : '#FFFFFF';
+const plusIc = theme === 'dark' ? '#FFD47A' : '#FFD47A';   // dấu + trên mark: vàng
+const word   = theme === 'dark' ? '#FFFFFF' : '#0F2747';
+const plusWd = theme === 'dark' ? '#FFD47A' : '#8A2B2B';   // dấu + trong wordmark: marsala (nền tối → vàng)
+const tag    = theme === 'dark' ? '#AEB6C8' : '#7A8499';
+const openA  = theme === 'dark' ? '#FFFFFF' : '#0F2747';
+---
+
+<span class={`aclab-logo ${iconOnly ? 'icon-only' : ''}`} style={`--mk:${size}px`}>
+  {/* ---------- MARK ---------- */}
+  {variant === 'badge' ? (
+    <svg class="mark" viewBox="0 0 100 100" aria-hidden="true">
+      <rect x="3" y="3" width="94" height="94" rx="21" fill={tile} />
+      <text x="45" y="72" text-anchor="middle" fill={letter}
+            font-family="'Computer Modern Serif', serif" font-size="68">A</text>
+      <text x="79" y="42" text-anchor="middle" fill={plusIc}
+            font-family="'Computer Modern Serif', serif" font-size="38">+</text>
+    </svg>
+  ) : (
+    <svg class="mark mark--open" viewBox="0 0 110 100" aria-hidden="true">
+      <text x="34" y="74" text-anchor="middle" fill={openA}
+            font-family="'Computer Modern Serif', serif" font-size="84">A</text>
+      <text x="86" y="50" text-anchor="middle" fill={theme === 'dark' ? '#FFD47A' : '#8A2B2B'}
+            font-family="'Computer Modern Serif', serif" font-size="50">+</text>
+    </svg>
+  )}
+
+  {/* ---------- WORDMARK ---------- */}
+  {!iconOnly && (
+    <span class="wm" style={`color:${word}`}>
+      <span class="name">AcLab<span class="plus" style={`color:${plusWd}`}>+</span>{intl && <span class="intl"> International</span>}</span>
+      {tagline && <small style={`color:${tag}`}>{intl ? 'International Academic Laboratory' : 'Academic Laboratory'}</small>}
+    </span>
+  )}
+</span>
+
+<style>
+  .aclab-logo { display: inline-flex; align-items: center; gap: .55em; line-height: 1; }
+  .aclab-logo .mark { height: var(--mk); width: auto; display: block; flex: none; }
+  .aclab-logo .wm { display: flex; flex-direction: column; }
+  .aclab-logo .name {
+    font-family: 'Computer Modern Serif', Georgia, serif;
+    font-weight: 600;
+    font-size: calc(var(--mk) * 0.62);
+    letter-spacing: .01em;
+  }
+  .aclab-logo .plus { font-weight: 700; }
+  .aclab-logo .intl {
+    font-family: 'Computer Modern Serif', Georgia, serif;
+    font-weight: 400; font-style: italic;
+    font-size: calc(var(--mk) * 0.42);
+    letter-spacing: .02em;
+  }
+  .aclab-logo small {
+    font-family: 'Be Vietnam Pro', system-ui, sans-serif;
+    font-weight: 500;
+    font-size: calc(var(--mk) * 0.17);
+    letter-spacing: .16em; text-transform: uppercase;
+    margin-top: .35em;
+  }
+  .aclab-logo.icon-only { gap: 0; }
+</style>
